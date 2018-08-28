@@ -43,7 +43,7 @@ Shape::Shape(double x_, double y_, double z_, double rotation_) {
 };
 
 Shape::~Shape() {
-}
+};
 
 double Shape::getX() {
 	return x;
