@@ -11,7 +11,7 @@ public:
 	Shape(double x_, double y_, double z_, double rotation_);
 	virtual ~Shape();
 
-	virtual void draw() = 0;
+	virtual void draw() = 0; //abstract function
 
 	double getX();
 	double getY();

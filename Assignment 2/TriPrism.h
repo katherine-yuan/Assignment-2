@@ -1,5 +1,5 @@
-#ifndef MTRN3500_TRIPRISM_H
-#define MTRN3500_TRIPRISM_H
+#ifndef MTRN2500_TRIPRISM_H
+#define MTRN2500_TRIPRISM_H
 
 #include "Shape.hpp"
 
@@ -29,4 +29,4 @@ protected:
 	double aLength, bLength, depth, theta;
 };
 
-#endif // for MTRN3500_TRIPRISM_H
+#endif // for MTRN2500_TRIPRISM_H

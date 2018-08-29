@@ -1,5 +1,5 @@
-#ifndef MTRN3500_RECTPRISM_H
-#define MTRN3500_RECTPRISM_H
+#ifndef MTRN2500_RECTPRISM_H
+#define MTRN2500_RECTPRISM_H
 
 #include "Shape.hpp"
 
@@ -27,4 +27,4 @@ protected:
 	double xLength, yLength, zLength;
 };
 
-#endif // for MTRN3500_RECTPRISM_H
+#endif // for MTRN2500_RECTPRISM_H
