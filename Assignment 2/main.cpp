@@ -39,6 +39,9 @@
 #include "HUD.hpp"
 #include "ObstacleManager.hpp"
 
+#include "TriPrism.h"
+#include "TrapPrism.h"
+
 void display();
 void reshape(int width, int height);
 void idle();
@@ -153,6 +156,24 @@ void drawGoals()
 	}
 }
 
+//added this like we did in tutorial 6
+void testdraw() {
+	//code here for testing
+
+	/*
+	//TESTING TRIANGULAR PRISM
+	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, theta_
+	TriPrism TriPrism1(0, 0, 0, 0, 5, 3, 8, 3.14/5); //call constructor to create triangular prism
+	TriPrism1.draw();								 //draw triangular prism
+	*/
+
+	//TESTING TRAPEZOIDAL PRISM
+	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, height_, offset_
+	TrapPrism TrapPrism1(0, 0, 0, 0, 8, 5, 12, 3, 1); //call constructor to create triangular prism
+	TrapPrism1.draw();								//draw triangular prism
+
+}
+
 void display() {
 	frameCounter++;
 	// -------------------------------------------------------------------------
@@ -194,6 +215,8 @@ void display() {
 
 	// draw HUD
 	HUD::Draw();
+
+	testdraw(); //added this like we did in tutorial 6
 
 	glutSwapBuffers();
 };

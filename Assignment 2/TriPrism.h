@@ -29,4 +29,4 @@ protected:
 	double aLength, bLength, depth, theta;
 };
 
-#endif // for MTRN3500_RECTPRISM_H
+#endif // for MTRN3500_TRIPRISM_H

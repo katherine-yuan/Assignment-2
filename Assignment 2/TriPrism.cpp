@@ -21,6 +21,7 @@
 TriPrism::TriPrism() {
 	x = y = z = 0.0;
 	rotation = 0.0;
+	aLength = bLength = depth = theta = 0.0;
 	red = green = blue = 1.0;
 };
 
@@ -28,12 +29,13 @@ TriPrism::TriPrism(double x_, double y_, double z_, double rotation_, double aLe
 	x = x_;
 	y = y_;
 	z = z_;
+	rotation = rotation_;
+
 	aLength = aLength_;
 	bLength = bLength_;
 	depth = depth_;
 	theta = theta_;
-
-	rotation = 0.0;
+	
 	red = green = blue = 1.0;
 };
 
@@ -73,5 +75,30 @@ void TriPrism::setTheta(double theta_) {
 };
 
 void TriPrism::draw() {
-	//code here
+
+	double aLengthHalf = aLength / 2;
+	double depthHalf = depth / 2;
+
+	glBegin(GL_QUADS);
+
+	//base of the triangular prism
+	setColor(1, 0, 0);							//set to red
+	glVertex3f(aLengthHalf, 0 , depthHalf);		//bottom far left corner
+	glVertex3f(-aLengthHalf, 0, depthHalf);		//far right corner
+	glVertex3f(-aLengthHalf, 0, -depthHalf);	//front right corner
+	glVertex3f(aLengthHalf, 0, -depthHalf);		//bottom front left corner
+
+	//left side of the triangular prism
+	setColor(0, 1, 0);							//set to green
+
+	glTranslated(aLengthHalf, 0, 0);			//move axis to centre of left edge
+	glRotated(theta, 0, 0, 1);					//rotate theta about the z axis
+
+	glVertex3f(0, 0, depthHalf);				//bottom far left corner
+	glVertex3f(0, bLength, depthHalf);			//top far left corner
+	glVertex3f(0, bLength, -depthHalf);			//top front left corner
+	glVertex3f(0, 0, -depthHalf);				//bottom front left corner
+
+	glEnd();
+	
 }
