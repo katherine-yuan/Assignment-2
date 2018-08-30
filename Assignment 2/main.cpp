@@ -160,18 +160,34 @@ void drawGoals()
 void testdraw() {
 	//code here for testing
 
-	/*
+	
 	//TESTING TRIANGULAR PRISM: so far can draw the shape, yet to test position and rotation
 	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, theta_
 	TriPrism TriPrism1(0, 0, 0, 0, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
 	TriPrism1.draw();									//draw triangular prism
-	*/
 	
+	//testing position: working
+	TriPrism TriPrism2(20, 0, 0, 0, 10, 5, 15, 3.14 / 3);		//call constructor to create triangular prism
+	TriPrism2.draw();											//draw triangular prism
+
+	//testing rotation: not working
+	TriPrism TriPrism3(-20, 0, 0, 3.14/4, 10, 5, 15, 3.14 / 3);	//call constructor to create triangular prism
+	TriPrism3.draw();											//draw triangular prism
+	
+	/*
 	//TESTING TRAPEZOIDAL PRISM
 	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, height_, offset_
 	TrapPrism TrapPrism1(0, 0, 0, 0, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
 	TrapPrism1.draw();									//draw trapezoidal prism
 	
+	//testing position: working
+	TrapPrism TrapPrism2(20, 0, 0, 0, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
+	TrapPrism2.draw();									//draw trapezoidal prism
+
+	//testing rotation: not working
+	TrapPrism TrapPrism3(-30, 0, 0, 3.14/2, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
+	TrapPrism3.draw();											//draw trapezoidal prism
+	*/
 }
 
 void display() {

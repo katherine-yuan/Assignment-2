@@ -28,6 +28,7 @@ TrapPrism::TrapPrism(double x_, double y_, double z_, double rotation_, double a
 	x = x_;
 	y = y_;
 	z = z_;
+
 	rotation = rotation_;
 
 	aLength = aLength_;
@@ -89,12 +90,17 @@ void TrapPrism::draw() {
 
 	double topLeftCornerX = aLengthHalf - offset;
 	double topRightCornerX = aLengthHalf - offset - bLength;
+	
+	glPushMatrix();
+
+	positionInGL();		//set position
 
 	glBegin(GL_QUADS);
 
 	//base of the trapezoidal prism
 	setColor(1, 0, 0);	//set color to red to better visualise each section
 	setColorInGL();
+
 	glVertex3f(aLengthHalf, 0, depthHalf);		//bottom far left corner
 	glVertex3f(-aLengthHalf, 0, depthHalf);		//bottom far right corner
 	glVertex3f(-aLengthHalf, 0, -depthHalf);	//bottom front right corner
@@ -111,6 +117,7 @@ void TrapPrism::draw() {
 	//front side of trapezoidal prism
 	setColor(0, 0, 1);	//set color to blue
 	setColorInGL();
+
 	glVertex3f(aLengthHalf, 0, -depthHalf);					//bottom front left corner
 	glVertex3f(-aLengthHalf, 0, -depthHalf);				//bottom front right corner
 	glVertex3f(topRightCornerX, height, -depthHalf);		//top front right corner
@@ -138,5 +145,7 @@ void TrapPrism::draw() {
 	glVertex3f(topRightCornerX, height, -depthHalf);		//top front right corner
 
 	glEnd();
+
+	glPopMatrix();
 
 }

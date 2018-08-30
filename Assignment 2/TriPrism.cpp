@@ -77,6 +77,10 @@ void TriPrism::setTheta(double theta_) {
 
 void TriPrism::draw() {
 
+	glPushMatrix();
+
+	positionInGL();
+
 	double aLengthHalf = aLength / 2;
 	double depthHalf = depth / 2;
 
@@ -130,4 +134,5 @@ void TriPrism::draw() {
 
 	glEnd();
 	
+	glPopMatrix();
 }
