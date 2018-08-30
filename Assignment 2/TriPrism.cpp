@@ -1,3 +1,4 @@
+#include <math.h>
 
 #include "Shape.hpp"
 #include "TriPrism.h"
@@ -79,10 +80,15 @@ void TriPrism::draw() {
 	double aLengthHalf = aLength / 2;
 	double depthHalf = depth / 2;
 
+	double topLeftCornerX = aLengthHalf - bLength * cos(theta);
+	double topLeftCornerY = bLength * sin(theta);
+
+	//DRAWING QUADS
 	glBegin(GL_QUADS);
 
 	//base of the triangular prism
 	setColor(1, 0, 0);							//set to red
+	setColorInGL();
 	glVertex3f(aLengthHalf, 0 , depthHalf);		//bottom far left corner
 	glVertex3f(-aLengthHalf, 0, depthHalf);		//far right corner
 	glVertex3f(-aLengthHalf, 0, -depthHalf);	//front right corner
@@ -90,14 +96,37 @@ void TriPrism::draw() {
 
 	//left side of the triangular prism
 	setColor(0, 1, 0);							//set to green
+	setColorInGL();
+	glVertex3f(topLeftCornerX, topLeftCornerY, -depthHalf);		//top front left corner
+	glVertex3f(aLengthHalf, 0, -depthHalf);						//bottom front left corner
+	glVertex3f(aLengthHalf, 0, depthHalf);						//bottom far left corner
+	glVertex3f(topLeftCornerX, topLeftCornerY, depthHalf);		//top far left corner
 
-	glTranslated(aLengthHalf, 0, 0);			//move axis to centre of left edge
-	glRotated(theta, 0, 0, 1);					//rotate theta about the z axis
+	//top side of the triangular prism
+	setColor(0, 0, 1);							//set to blue
+	setColorInGL();
+	glVertex3f(topLeftCornerX, topLeftCornerY, -depthHalf);		//top front left corner
+	glVertex3f(-aLengthHalf, 0, -depthHalf);					//front right corner
+	glVertex3f(-aLengthHalf, 0, depthHalf);						//far right corner
+	glVertex3f(topLeftCornerX, topLeftCornerY, depthHalf);		//top far left corner
 
-	glVertex3f(0, 0, depthHalf);				//bottom far left corner
-	glVertex3f(0, bLength, depthHalf);			//top far left corner
-	glVertex3f(0, bLength, -depthHalf);			//top front left corner
-	glVertex3f(0, 0, -depthHalf);				//bottom front left corner
+	glEnd();
+
+	//DRAWING TRIANGLES 
+	glBegin(GL_TRIANGLES);
+
+	setColor(1, 0, 1);		//set to purple
+	setColorInGL();
+
+	//front of triangular prism
+	glVertex3f(aLengthHalf, 0, -depthHalf);						//bottom front left corner
+	glVertex3f(topLeftCornerX, topLeftCornerY, -depthHalf);		//top front left corner
+	glVertex3f(-aLengthHalf, 0, -depthHalf);					//front right corner
+
+	//back of triangular prism
+	glVertex3f(aLengthHalf, 0, depthHalf);						//bottom far left corner
+	glVertex3f(topLeftCornerX, topLeftCornerY, depthHalf);		//top far left corner
+	glVertex3f(-aLengthHalf, 0, depthHalf);						//far right corner
 
 	glEnd();
 	

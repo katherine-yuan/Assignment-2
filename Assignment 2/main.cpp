@@ -161,17 +161,17 @@ void testdraw() {
 	//code here for testing
 
 	/*
-	//TESTING TRIANGULAR PRISM
+	//TESTING TRIANGULAR PRISM: so far can draw the shape, yet to test position and rotation
 	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, theta_
-	TriPrism TriPrism1(0, 0, 0, 0, 5, 3, 8, 3.14/5); //call constructor to create triangular prism
-	TriPrism1.draw();								 //draw triangular prism
+	TriPrism TriPrism1(0, 0, 0, 0, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
+	TriPrism1.draw();									//draw triangular prism
 	*/
-
+	
 	//TESTING TRAPEZOIDAL PRISM
 	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, height_, offset_
-	TrapPrism TrapPrism1(0, 0, 0, 0, 8, 5, 12, 3, 1); //call constructor to create triangular prism
-	TrapPrism1.draw();								//draw triangular prism
-
+	TrapPrism TrapPrism1(0, 0, 0, 0, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
+	TrapPrism1.draw();									//draw trapezoidal prism
+	
 }
 
 void display() {

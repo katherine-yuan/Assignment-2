@@ -6,9 +6,9 @@
 class TrapPrism : public Shape {
 
 public:
-	TrapPrism(); //default constructor
+	TrapPrism();	//default constructor
 	TrapPrism(double x_, double y_, double z_, double rotation_, double aLength_, double bLength_, double depth_, double height_, double offset_);
-	~TrapPrism();
+	~TrapPrism();	//destructor
 
 	//Getter functions
 	double getALength();

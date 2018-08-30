@@ -6,9 +6,9 @@
 class TriPrism : public Shape {
 
 public:
-	TriPrism(); //default constructor
+	TriPrism();		//default constructor
 	TriPrism(double x_, double y_, double z_, double rotation_, double aLength_, double bLength_, double depth_, double theta_);
-	~TriPrism();
+	~TriPrism();	//destructor
 
 	//Getter functions
 	double getALength();

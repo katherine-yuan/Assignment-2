@@ -93,18 +93,24 @@ void TrapPrism::draw() {
 	glBegin(GL_QUADS);
 
 	//base of the trapezoidal prism
+	setColor(1, 0, 0);	//set color to red to better visualise each section
+	setColorInGL();
 	glVertex3f(aLengthHalf, 0, depthHalf);		//bottom far left corner
 	glVertex3f(-aLengthHalf, 0, depthHalf);		//bottom far right corner
 	glVertex3f(-aLengthHalf, 0, -depthHalf);	//bottom front right corner
 	glVertex3f(aLengthHalf, 0, -depthHalf);		//bottom front left corner
 
 	//top side of the trapezoidal prism
+	setColor(0, 1, 0);	//set color to green
+	setColorInGL();
 	glVertex3f(topLeftCornerX, height, depthHalf);			//top far left corner
 	glVertex3f(topRightCornerX, height, depthHalf);			//top far right corner
 	glVertex3f(topRightCornerX, height, -depthHalf);		//top front right corner
 	glVertex3f(topLeftCornerX, height, -depthHalf);			//top front left corner
 
 	//front side of trapezoidal prism
+	setColor(0, 0, 1);	//set color to blue
+	setColorInGL();
 	glVertex3f(aLengthHalf, 0, -depthHalf);					//bottom front left corner
 	glVertex3f(-aLengthHalf, 0, -depthHalf);				//bottom front right corner
 	glVertex3f(topRightCornerX, height, -depthHalf);		//top front right corner
@@ -115,6 +121,21 @@ void TrapPrism::draw() {
 	glVertex3f(-aLengthHalf, 0, depthHalf);					//bottom far right corner
 	glVertex3f(topRightCornerX, height, depthHalf);			//top far right corner
 	glVertex3f(topLeftCornerX, height, depthHalf);			//top far left corner
+
+	//left side of trapezoidal prism
+	setColor(1, 0, 1);	//set color to purple
+	setColorInGL();
+
+	glVertex3f(aLengthHalf, 0, -depthHalf);					//bottom front left corner
+	glVertex3f(aLengthHalf, 0, depthHalf);					//bottom far left corner
+	glVertex3f(topLeftCornerX, height, depthHalf);			//top far left corner
+	glVertex3f(topLeftCornerX, height, -depthHalf);			//top front left corner
+
+	//right side of trapezoidal prism
+	glVertex3f(-aLengthHalf, 0, -depthHalf);				//bottom front right corner
+	glVertex3f(-aLengthHalf, 0, depthHalf);					//bottom far right corner
+	glVertex3f(topRightCornerX, height, depthHalf);			//top far right corner
+	glVertex3f(topRightCornerX, height, -depthHalf);		//top front right corner
 
 	glEnd();
 
