@@ -60,6 +60,12 @@
     <ClCompile Include="RectPrism.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TriPrism.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrapPrism.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.hpp">
@@ -102,6 +108,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RectPrism.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TriPrism.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TrapPrism.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

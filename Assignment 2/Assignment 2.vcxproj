@@ -159,6 +159,8 @@
     <ClCompile Include="RectPrism.cpp" />
     <ClCompile Include="RemoteDataManager.cpp" />
     <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="TrapPrism.cpp" />
+    <ClCompile Include="TriPrism.cpp" />
     <ClCompile Include="VectorMaths.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
@@ -175,6 +177,8 @@
     <ClInclude Include="RectPrism.h" />
     <ClInclude Include="RemoteDataManager.hpp" />
     <ClInclude Include="Shape.hpp" />
+    <ClInclude Include="TrapPrism.h" />
+    <ClInclude Include="TriPrism.h" />
     <ClInclude Include="VectorMaths.hpp" />
     <ClInclude Include="Vehicle.hpp" />
   </ItemGroup>
