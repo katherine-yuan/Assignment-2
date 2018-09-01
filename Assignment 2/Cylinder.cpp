@@ -19,28 +19,23 @@
 #endif
 
 Cylinder::Cylinder() {
-	// Default constructor for this shape - do we need to do this?
+	// Default constructor for this shape
 	innerRadius = 0.0;
 	radius = 5;
 	length = 10;
 	rotation = 0.0;
-	slices = 1000;
-	stacks = 1;
 	red = green = blue = 1.0;
 }
 
-Cylinder::Cylinder(double x_, double y_, double z_, double radius_, double innerRadius_, double length_, double rotation_) {
+Cylinder::Cylinder(double x_, double y_, double z_, double rotation_, double radius_, double innerRadius_, double length_) {
 	x = x_;
 	y = y_;
 	z = z_;
-
 	rotation = rotation_;
 
 	radius = radius_;
 	innerRadius = innerRadius_;
 	length = length_;
-	slices = 1000;
-	stacks = 1;
 
 	red = blue = green = 1.0;
 }
@@ -62,12 +57,12 @@ void Cylinder::draw() {
 	// Draw hollow cylinder body
 	setColor(1, 0, 0); // set colour to red
 	setColorInGL();
-	gluCylinder(cylinder, radius, radius, length, slices, stacks);
+	gluCylinder(cylinder, radius, radius, length, SLICES, STACKS);
 
 	// Draw caps using gluDisk
 	setColor(0, 1, 0); // set colour to green
 	setColorInGL();
-	gluDisk(cylinder, innerRadius, radius, slices, stacks);
+	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS);
 	glTranslatef(x, y, length);
 	gluDisk(cylinder, innerRadius, radius, 1000, 1); 
 
