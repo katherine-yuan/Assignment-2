@@ -25,11 +25,10 @@ RectPrism::RectPrism() {
 	red = green = blue = 1.0;
 }
 
-RectPrism::RectPrism(double x_, double y_, double z_, double length_, double depth_, double height_, double rotation_) {
+RectPrism::RectPrism(double x_, double y_, double z_, double rotation_, double length_, double depth_, double height_) {
 	x = x_;
 	y = y_;
 	z = z_;
-
 	rotation = rotation_;
 
 	length = length_;
