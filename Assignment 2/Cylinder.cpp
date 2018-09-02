@@ -64,7 +64,7 @@ void Cylinder::draw() {
 	setColorInGL();
 	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS);
 	glTranslatef(x, y, length);
-	gluDisk(cylinder, innerRadius, radius, 1000, 1); 
+	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS); //changed numbers to #defined versions here
 
 	glPopMatrix();
 }

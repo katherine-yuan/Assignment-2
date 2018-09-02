@@ -42,6 +42,7 @@
 #include "TriPrism.h"
 #include "TrapPrism.h"
 #include "RectPrism.h"
+#include "Cylinder.h"
 
 void display();
 void reshape(int width, int height);
@@ -166,6 +167,7 @@ void testdraw() {
 	//and you can just make all the bases 0. I think it's cause when you change y, you move your perspective to that position,
 	//so like with RectPrism2, the centre of the base of the rectprism (where u draw from) is now at 0, 30, 0
 
+	/* 
 	//TESTING RECTANGULAR PRISM
 	//input variables in order of x_, y_, z_, rotation_, length_, depth_, height_
 	RectPrism RectPrism1(0, 0, 0, 0, 10, 20, 5);	//call constructor to create rectangular prism
@@ -179,6 +181,19 @@ void testdraw() {
 	//testing rotation
 	RectPrism RectPrism3(-30, 0, 0, 1.05, 10, 20, 5);	//call constructor to create rectangular prism
 	RectPrism3.draw();									//draw rectangular prism
+	*/ //Commented this section out to test cylinder for now
+
+
+	//TESTING CYLINDER
+	//input variables in order of x_, y_, z_, rotation_, radius_, innerRadius_, length_
+	Cylinder Cylinder1(0, 0, 0, 0, 10, 5, 15);			//call constructor to create a cylinder
+	Cylinder1.draw();									//draw cylinder
+	
+	//@Bec, something weirds happening here, the disk at the back is floating in a weird spot when translated?
+	//would you be able to try and fix this?
+	//testing position
+	Cylinder Cylinder2(-20, 20, 0, 0, 10, 5, 15);		//call constructor to create a cylinder
+	Cylinder2.draw();									//draw cylinder
 
 
 	/*
