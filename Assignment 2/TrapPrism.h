@@ -1,3 +1,5 @@
+// Katherine Yuan z5161528 2018/08/29
+
 #ifndef MTRN2500_TRAPPRISM_H
 #define MTRN2500_TRAPPRISM_H
 

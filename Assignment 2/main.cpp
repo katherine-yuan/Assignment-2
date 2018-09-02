@@ -183,7 +183,7 @@ void testdraw() {
 	RectPrism3.draw();									//draw rectangular prism
 	*/ //Commented this section out to test cylinder for now
 
-
+	/*
 	//TESTING CYLINDER
 	//input variables in order of x_, y_, z_, rotation_, radius_, innerRadius_, length_
 	Cylinder Cylinder1(0, 0, 0, 0, 10, 5, 15);			//call constructor to create a cylinder
@@ -194,23 +194,23 @@ void testdraw() {
 	//testing position
 	Cylinder Cylinder2(-20, 20, 0, 0, 10, 5, 15);		//call constructor to create a cylinder
 	Cylinder2.draw();									//draw cylinder
-
+	*/
 
 	/*
 	//TESTING TRIANGULAR PRISM
 	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, theta_
-	//TriPrism TriPrism1(0, 0, 0, 0, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
-	//TriPrism1.draw();									//draw triangular prism
+	TriPrism TriPrism1(0, 0, 0, 0, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
+	TriPrism1.draw();									//draw triangular prism
 	
 	//testing position: working
-	//TriPrism TriPrism2(20, 0, 0, 0, 10, 5, 15, 3.14/3);		//call constructor to create triangular prism
-	//TriPrism2.draw();											//draw triangular prism
+	TriPrism TriPrism2(20, 0, 0, 0, 10, 5, 15, 3.14/3);		//call constructor to create triangular prism
+	TriPrism2.draw();											//draw triangular prism
 
 	//testing rotation: not working
 	TriPrism TriPrism3(0, 0, 0, -3.14/4.0, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
 	TriPrism3.draw();											//draw triangular prism
 	*/
-	
+
 	/*
 	//TESTING TRAPEZOIDAL PRISM
 	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, height_, offset_

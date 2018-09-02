@@ -1,6 +1,8 @@
 #ifndef MTRN2500_TRIPRISM_H
 #define MTRN2500_TRIPRISM_H
 
+// Katherine Yuan z5161528 2018/08/29
+
 #include "Shape.hpp"
 
 class TriPrism : public Shape {
