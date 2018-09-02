@@ -19,7 +19,7 @@
 #endif
 
 RectPrism::RectPrism() {
-	// Default constructor for this shape - do we need to do this?
+	// Default constructor for this shape
 	length = depth = height = 0;
 	rotation = 0.0;
 	red = green = blue = 1.0;
