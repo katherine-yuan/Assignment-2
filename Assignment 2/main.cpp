@@ -183,7 +183,7 @@ void testdraw() {
 	RectPrism3.draw();									//draw rectangular prism
 	*/ //Commented this section out to test cylinder for now
 
-	/*
+	
 	//TESTING CYLINDER
 	//input variables in order of x_, y_, z_, rotation_, radius_, innerRadius_, length_
 	Cylinder Cylinder1(0, 0, 0, 0, 10, 5, 15);			//call constructor to create a cylinder
@@ -194,7 +194,7 @@ void testdraw() {
 	//testing position
 	Cylinder Cylinder2(-20, 20, 0, 0, 10, 5, 15);		//call constructor to create a cylinder
 	Cylinder2.draw();									//draw cylinder
-	*/
+	
 
 	/*
 	//TESTING TRIANGULAR PRISM
