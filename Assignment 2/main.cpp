@@ -44,6 +44,8 @@
 #include "RectPrism.h"
 #include "Cylinder.h"
 
+#include "MyVehicle.h"
+
 void display();
 void reshape(int width, int height);
 void idle();
@@ -183,7 +185,7 @@ void testdraw() {
 	RectPrism3.draw();									//draw rectangular prism
 	*/ //Commented this section out to test cylinder for now
 
-	
+	/*
 	//TESTING CYLINDER
 	//input variables in order of x_, y_, z_, rotation_, radius_, innerRadius_, length_
 	Cylinder Cylinder1(0, 0, 0, 0, 10, 5, 15);			//call constructor to create a cylinder
@@ -194,7 +196,7 @@ void testdraw() {
 	//testing position
 	Cylinder Cylinder2(-20, 20, 0, 0, 10, 5, 15);		//call constructor to create a cylinder
 	Cylinder2.draw();									//draw cylinder
-	
+	*/
 
 	/*
 	//TESTING TRIANGULAR PRISM
@@ -224,6 +226,15 @@ void testdraw() {
 	//testing rotation: not working
 	TrapPrism TrapPrism3(-30, 0, 0, 3.14/2, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
 	TrapPrism3.draw();											//draw trapezoidal prism
+	*/
+
+	/*
+	//TESTING MYVEHICLE
+	MyVehicle Vehicle1(0, 0, 0);
+	Vehicle1.draw();
+
+	MyVehicle Vehicle2(-50, 10, 10);
+	Vehicle2.draw();
 	*/
 }
 

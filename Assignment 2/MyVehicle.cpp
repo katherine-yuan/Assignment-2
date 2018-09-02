@@ -56,12 +56,22 @@ void MyVehicle::draw() {
 	frontBase.draw();
 
 	//draw top of front section
-	TriPrism frontTop(13.5, 4, 0, 0, 7, sqrt(53), 10, atan(2 / 7));
+	TriPrism frontTop(13.5, 4, 0, 0, 7, sqrt(53), 10, atan2(2,7));
 	frontTop.draw();
 
 	//draw spoiler
-	TriPrism spoiler(-9, 6, 0, 0, 2, sqrt(5), 10, atan(1 / 2));
+	TriPrism spoiler(-9, 6, 0, 0, 2, sqrt(5), 10, atan2(1,2));
 	spoiler.draw();
+
+	//draw wheels
+	Cylinder frontLeftWheel(11, -1, -5.5, 0, 3, 1.5, 1.5);
+	frontLeftWheel.draw();
+	Cylinder frontRightWheel(11, -1, 4, 0, 3, 1.5, 1.5); //feel like the 4 should be 5.5???
+	frontRightWheel.draw();
+	Cylinder backRightWheel(-6, -1, 4, 0, 3, 1.5, 1.5);
+	backRightWheel.draw();
+	Cylinder backLeftWheel(-6, -1, -5.5, 0, 3, 1.5, 1.5);
+	backLeftWheel.draw();
 
 	//move back to global frame of reference
 	glPopMatrix();

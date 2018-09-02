@@ -43,7 +43,7 @@ Cylinder::Cylinder(double x_, double y_, double z_, double rotation_, double rad
 Cylinder::~Cylinder() {}
 
 void Cylinder::draw() {
-
+	
 	// Set position
 	glPushMatrix();
 	positionInGL();
@@ -65,11 +65,11 @@ void Cylinder::draw() {
 	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS);
 
 	glTranslatef(0, 0, length); //changed this, moves to draw the back disk
-
 	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS); //changed numbers to #defined versions here
-
+	
 	glPopMatrix();
 }
+
 // Getters
 double Cylinder::getLength() {
 	return length;

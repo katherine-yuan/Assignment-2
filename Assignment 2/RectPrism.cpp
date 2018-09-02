@@ -54,6 +54,9 @@ void RectPrism::draw() {
 	//trying to draw a rectangle
 	glBegin(GL_QUADS);
 
+	setColor(0.5, 0.5, 0.5);		//set color for rectangular prisms to grey
+	setColorInGL();
+
 	// base 
 	glVertex3f(halfLength, base, -halfDepth ); //Bottom front left corner
 	glVertex3f(halfLength , base, halfDepth); //Bottom back left corner
