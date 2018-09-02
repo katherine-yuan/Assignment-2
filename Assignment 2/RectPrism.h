@@ -1,4 +1,4 @@
-/ Rebecca Schacht z5115440 2018/08/31
+// Rebecca Schacht z5115440 2018/08/31
 
 #ifndef MTRN2500_RECTPRISM_H
 #define MTRN2500_RECTPRISM_H
