@@ -41,6 +41,7 @@
 
 #include "TriPrism.h"
 #include "TrapPrism.h"
+#include "RectPrism.h"
 
 void display();
 void reshape(int width, int height);
@@ -160,8 +161,28 @@ void drawGoals()
 void testdraw() {
 	//code here for testing
 
-	
-	//TESTING TRIANGULAR PRISM: so far can draw the shape, yet to test position and rotation
+	//@Bec, testing rectangular prism here, if you look at RectPrism2, and use double base = y (try changing it back in RectPrism.cpp),
+	//the height goes super tall. I added in a line so that base = 0 and it seems to work. I don't think you need the base variable,
+	//and you can just make all the bases 0. I think it's cause when you change y, you move your perspective to that position,
+	//so like with RectPrism2, the centre of the base of the rectprism (where u draw from) is now at 0, 30, 0
+
+	//TESTING RECTANGULAR PRISM
+	//input variables in order of x_, y_, z_, rotation_, length_, depth_, height_
+	RectPrism RectPrism1(0, 0, 0, 0, 10, 20, 5);	//call constructor to create rectangular prism
+	RectPrism1.draw();								//draw rectangular prism
+
+	//testing position
+	RectPrism RectPrism2(0, 30, 0, 0, 10, 20, 5);		//call constructor to create rectangular prism
+	RectPrism2.draw();									//draw rectangular prism
+
+	//@Bec, tried rotation with this one too but can't seem to get it to work either, should be rotated about 90 degrees about the y-axis
+	//testing rotation
+	RectPrism RectPrism3(-30, 0, 0, 1.05, 10, 20, 5);	//call constructor to create rectangular prism
+	RectPrism3.draw();									//draw rectangular prism
+
+
+	/*
+	//TESTING TRIANGULAR PRISM
 	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, theta_
 	//TriPrism TriPrism1(0, 0, 0, 0, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
 	//TriPrism1.draw();									//draw triangular prism
@@ -173,6 +194,7 @@ void testdraw() {
 	//testing rotation: not working
 	TriPrism TriPrism3(0, 0, 0, -3.14/4.0, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
 	TriPrism3.draw();											//draw triangular prism
+	*/
 	
 	/*
 	//TESTING TRAPEZOIDAL PRISM
