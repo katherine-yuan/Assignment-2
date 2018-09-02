@@ -52,7 +52,7 @@ void Cylinder::draw() {
 	GLUquadricObj *cylinder = gluNewQuadric();
 
 	// Adjust centre to server shape specifications given
-	glTranslatef(x, radius, -length / 2);
+	//glTranslatef(x, radius, -length / 2); //commented this out, i think positionInGL() (see line 49) already does it for you
 
 	// Draw hollow cylinder body
 	setColor(1, 0, 0); // set colour to red
@@ -63,7 +63,9 @@ void Cylinder::draw() {
 	setColor(0, 1, 0); // set colour to green
 	setColorInGL();
 	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS);
-	glTranslatef(x, y, length);
+
+	glTranslatef(0, 0, length); //changed this, moves to draw the back disk
+
 	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS); //changed numbers to #defined versions here
 
 	glPopMatrix();
