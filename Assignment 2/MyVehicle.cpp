@@ -66,9 +66,9 @@ void MyVehicle::draw() {
 	//draw wheels
 	Cylinder frontLeftWheel(11, -1, -5.5, 0, 3, 1.5, 1.5);
 	frontLeftWheel.draw();
-	Cylinder frontRightWheel(11, -1, 4, 0, 3, 1.5, 1.5); //feel like the 4 should be 5.5???
+	Cylinder frontRightWheel(11, -1, 4, 0, 3, 1.5, 1.5);	//feel like the 4 should be 5.5??? I think it has something to do with the glTranslatef used in cylinder but I thought glPushMatrix and glPopMatrix would fix it, not sure
 	frontRightWheel.draw();
-	Cylinder backRightWheel(-6, -1, 4, 0, 3, 1.5, 1.5);
+	Cylinder backRightWheel(-6, -1, 4, 0, 3, 1.5, 1.5);		//again, feel like the 4 should be 5.5???
 	backRightWheel.draw();
 	Cylinder backLeftWheel(-6, -1, -5.5, 0, 3, 1.5, 1.5);
 	backLeftWheel.draw();
