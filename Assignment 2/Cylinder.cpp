@@ -60,7 +60,8 @@ void Cylinder::draw() {
 	gluCylinder(cylinder, radius, radius, length, SLICES, STACKS);
 
 	// Draw caps using gluDisk
-	setColor(0, 0, 0); // set colour to blue
+	setColor(0, 0, 1); // set colour to blue
+
 	setColorInGL();
 	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS);
 
