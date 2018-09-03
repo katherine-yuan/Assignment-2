@@ -45,6 +45,7 @@
 #include "Cylinder.h"
 
 #include "MyVehicle.h"
+#include "ModelVehicle.h"
 
 void display();
 void reshape(int width, int height);
@@ -235,6 +236,14 @@ void testdraw() {
 
 	MyVehicle Vehicle2(-50, 10, 10);
 	Vehicle2.draw();
+	*/
+	
+	/* 
+	// TESTING MODELVEHICLE
+	// Try adding angle values (in degrees) to see the car move around.
+	// ModelVehicle Car1(x,y,z,rotation)
+	ModelVehicle BecCar(0,0,0,0);
+	BecCar.draw();
 	*/
 }
 
