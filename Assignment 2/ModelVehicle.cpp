@@ -65,7 +65,7 @@ void ModelVehicle::draw() {
 	// Front wheels 
 	// Note that the right wheel must be rotated 180 degrees around the y axis for it to be in 
 	// the required orientation.
-	Cylinder frontRight(x + 11, y + 4, z + 11, rotation+180, frontRadius, inRadius, thickness);
+	Cylinder frontRight(x + 11, y + 4, z + 11, rotation + 180, frontRadius, inRadius, thickness);
 	frontRight.draw();
 	Cylinder frontLeft(x + 11, y + 4, z - 11, rotation, frontRadius, inRadius, thickness);
 	frontLeft.draw();
