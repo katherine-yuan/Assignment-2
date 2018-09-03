@@ -52,7 +52,7 @@ void Cylinder::draw() {
 	GLUquadricObj *cylinder = gluNewQuadric();
 
 	// Adjust centre to server shape specifications given
-	//glTranslatef(x, radius, -length / 2); //commented this out, i think positionInGL() (see line 49) already does it for you
+	glTranslatef(x, radius, -length / 2); //we need this to meet the specs, position InGL doesnt meet specs
 
 	// Draw hollow cylinder body
 	setColor(1, 0, 0); // set colour to red
