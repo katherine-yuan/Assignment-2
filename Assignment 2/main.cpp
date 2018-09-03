@@ -41,6 +41,10 @@
 
 #include "TriPrism.h"
 #include "TrapPrism.h"
+#include "RectPrism.h"
+#include "Cylinder.h"
+
+#include "MyVehicle.h"
 
 void display();
 void reshape(int width, int height);
@@ -160,20 +164,55 @@ void drawGoals()
 void testdraw() {
 	//code here for testing
 
+	//@Bec, testing rectangular prism here, if you look at RectPrism2, and use double base = y (try changing it back in RectPrism.cpp),
+	//the height goes super tall. I added in a line so that base = 0 and it seems to work. I don't think you need the base variable,
+	//and you can just make all the bases 0. I think it's cause when you change y, you move your perspective to that position,
+	//so like with RectPrism2, the centre of the base of the rectprism (where u draw from) is now at 0, 30, 0
+
+	/* 
+	//TESTING RECTANGULAR PRISM
+	//input variables in order of x_, y_, z_, rotation_, length_, depth_, height_
+	RectPrism RectPrism1(0, 0, 0, 0, 10, 20, 5);	//call constructor to create rectangular prism
+	RectPrism1.draw();								//draw rectangular prism
+
+	//testing position
+	RectPrism RectPrism2(0, 30, 0, 0, 10, 20, 5);		//call constructor to create rectangular prism
+	RectPrism2.draw();									//draw rectangular prism
+
+	//@Bec, tried rotation with this one too but can't seem to get it to work either, should be rotated about 90 degrees about the y-axis
+	//testing rotation
+	RectPrism RectPrism3(-30, 0, 0, 1.05, 10, 20, 5);	//call constructor to create rectangular prism
+	RectPrism3.draw();									//draw rectangular prism
+	*/ //Commented this section out to test cylinder for now
+
+	/*
+	//TESTING CYLINDER
+	//input variables in order of x_, y_, z_, rotation_, radius_, innerRadius_, length_
+	Cylinder Cylinder1(0, 0, 0, 0, 10, 5, 15);			//call constructor to create a cylinder
+	Cylinder1.draw();									//draw cylinder
 	
-	//TESTING TRIANGULAR PRISM: so far can draw the shape, yet to test position and rotation
+	//@Bec, something weirds happening here, the disk at the back is floating in a weird spot when translated?
+	//would you be able to try and fix this?
+	//testing position
+	Cylinder Cylinder2(-20, 20, 0, 0, 10, 5, 15);		//call constructor to create a cylinder
+	Cylinder2.draw();									//draw cylinder
+	*/
+
+	/*
+	//TESTING TRIANGULAR PRISM
 	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, theta_
 	TriPrism TriPrism1(0, 0, 0, 0, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
 	TriPrism1.draw();									//draw triangular prism
 	
 	//testing position: working
-	TriPrism TriPrism2(20, 0, 0, 0, 10, 5, 15, 3.14 / 3);		//call constructor to create triangular prism
+	TriPrism TriPrism2(20, 0, 0, 0, 10, 5, 15, 3.14/3);		//call constructor to create triangular prism
 	TriPrism2.draw();											//draw triangular prism
 
 	//testing rotation: not working
-	TriPrism TriPrism3(-20, 0, 0, 3.14/4, 10, 5, 15, 3.14 / 3);	//call constructor to create triangular prism
+	TriPrism TriPrism3(0, 0, 0, -3.14/4.0, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
 	TriPrism3.draw();											//draw triangular prism
-	
+	*/
+
 	/*
 	//TESTING TRAPEZOIDAL PRISM
 	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, height_, offset_
@@ -187,6 +226,15 @@ void testdraw() {
 	//testing rotation: not working
 	TrapPrism TrapPrism3(-30, 0, 0, 3.14/2, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
 	TrapPrism3.draw();											//draw trapezoidal prism
+	*/
+
+	/*
+	//TESTING MYVEHICLE
+	MyVehicle Vehicle1(0, 0, 0);
+	Vehicle1.draw();
+
+	MyVehicle Vehicle2(-50, 10, 10);
+	Vehicle2.draw();
 	*/
 }
 
