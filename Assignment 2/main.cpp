@@ -207,11 +207,11 @@ void testdraw() {
 	
 	//testing position: working
 	TriPrism TriPrism2(20, 0, 0, 0, 10, 5, 15, 3.14/3);		//call constructor to create triangular prism
-	TriPrism2.draw();											//draw triangular prism
+	TriPrism2.draw();										//draw triangular prism
 
-	//testing rotation: not working
-	TriPrism TriPrism3(0, 0, 0, -3.14/4.0, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
-	TriPrism3.draw();											//draw triangular prism
+	//testing rotation: working
+	TriPrism TriPrism3(0, 0, 0, 90, 10, 5, 15, 3.14/3);		//call constructor to create triangular prism
+	TriPrism3.draw();										//draw triangular prism
 	*/
 
 	/*
@@ -224,8 +224,8 @@ void testdraw() {
 	TrapPrism TrapPrism2(20, 0, 0, 0, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
 	TrapPrism2.draw();									//draw trapezoidal prism
 
-	//testing rotation: not working
-	TrapPrism TrapPrism3(-30, 0, 0, 3.14/2, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
+	//testing rotation: working
+	TrapPrism TrapPrism3(-30, 0, 0, 90, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
 	TrapPrism3.draw();											//draw trapezoidal prism
 	*/
 
@@ -238,13 +238,13 @@ void testdraw() {
 	Vehicle2.draw();
 	*/
 	
-	/* 
+	
 	// TESTING MODELVEHICLE
 	// Try adding angle values (in degrees) to see the car move around.
 	// ModelVehicle Car1(x,y,z,rotation)
 	ModelVehicle BecCar(0,0,0,0);
 	BecCar.draw();
-	*/
+	
 }
 
 void display() {
