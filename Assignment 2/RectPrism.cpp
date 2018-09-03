@@ -54,7 +54,7 @@ void RectPrism::draw() {
 	//trying to draw a rectangle
 	glBegin(GL_QUADS);
 
-	setColor(0.5, 0.5, 0.5);		//set color for rectangular prisms to grey
+	setColor(1, 0, 0.5);		//set color for rectangular prisms to pink
 	setColorInGL();
 
 	// base 
