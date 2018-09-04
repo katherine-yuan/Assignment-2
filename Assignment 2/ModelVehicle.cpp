@@ -43,7 +43,7 @@ void ModelVehicle::draw() {
 
 	// Chasis dimensions:
 	double length = 30;
-	double width  = 20;
+	double width = 20;
 	double height = 10;
 	double rotation = 0; // This needs to be here in order for rotation to work
 
@@ -52,6 +52,8 @@ void ModelVehicle::draw() {
 	double backRadius = 8;
 	double inRadius = 0;
 	double thickness = 1;
+	double distToWheelsX = (length / 2) - frontRadius;
+	double distToWheelsZ = (width / 2) + thickness;
 
 	//Roof dimensions
 	double bottomLength = 20;
@@ -61,8 +63,9 @@ void ModelVehicle::draw() {
 
 	//Spoiler dimensions
 	double spoilerSideLength = 2;
-	double spoilerBaseLenth = 4;
+	double spoilerBaseLength = 4;
 	double spoilerTheta = 3.14 / 3;
+	double distToSpoiler = (length / 2) - (spoilerBaseLength / 2);
 
 
 	// Move to the vehicle's local frame of reference
@@ -70,29 +73,29 @@ void ModelVehicle::draw() {
 	positionInGL();
 
 	// Main body of vehicle
-	RectPrism mainBody(x, y + 4, z, rotation, length, width, height);
+	RectPrism mainBody(x, y + frontRadius, z, rotation, length, width, height);
 	mainBody.draw();
 
 	//Roof of vehicle
-	TrapPrism roof(x, y + 4 + height, z, rotation, bottomLength, topLength, width, roofHeight, roofOffset);
+	TrapPrism roof(x, y + frontRadius + height, z, rotation, bottomLength, topLength, width, roofHeight, roofOffset);
 	roof.draw();
 	
 	// Front wheels 
 	// Note that the right wheel must be rotated 180 degrees around the y axis for it to be in 
 	// the required orientation.
-	Cylinder frontRight(x + 11, y + 4, z + 11, rotation + 180, frontRadius, inRadius, thickness);
+	Cylinder frontRight(x + distToWheelsX, y + frontRadius, z + distToWheelsZ, rotation + 180, frontRadius, inRadius, thickness);
 	frontRight.draw();
-	Cylinder frontLeft(x + 11, y + 4, z - 11, rotation, frontRadius, inRadius, thickness);
+	Cylinder frontLeft(x + distToWheelsX, y + frontRadius, z - distToWheelsZ, rotation, frontRadius, inRadius, thickness);
 	frontLeft.draw();
 
 	// Back wheels 
-	Cylinder backRight(x - 11, y + 8, z + 11, rotation + 180, backRadius, inRadius, thickness);
+	Cylinder backRight(x - distToWheelsX, y + backRadius, z + distToWheelsZ, rotation + 180, backRadius, inRadius, thickness);
 	backRight.draw();
-	Cylinder backLeft(x - 11, y + 8, z - 11, rotation, backRadius, inRadius, thickness);
+	Cylinder backLeft(x - distToWheelsX, y + backRadius, z - distToWheelsZ, rotation, backRadius, inRadius, thickness);
 	backLeft.draw();
 
 	//Spoiler
-	TriPrism spoiler(x - 13, y + 4 + height, z, rotation, spoilerBaseLenth, spoilerSideLength, width, spoilerTheta);
+	TriPrism spoiler(x - distToSpoiler, y + frontRadius + height, z, rotation, spoilerBaseLength, spoilerSideLength, width, spoilerTheta);
 	spoiler.draw();
 
 	//move back to global frame of reference
