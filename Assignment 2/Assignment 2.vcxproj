@@ -155,7 +155,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Messages.cpp" />
     <ClCompile Include="ModelVehicle.cpp" />
-    <ClCompile Include="MyVehicle.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleManager.cpp" />
     <ClCompile Include="Quaternion.cpp" />
@@ -166,6 +165,7 @@
     <ClCompile Include="TriPrism.cpp" />
     <ClCompile Include="VectorMaths.cpp" />
     <ClCompile Include="Vehicle.cpp" />
+    <ClCompile Include="Wheel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.hpp" />
@@ -176,7 +176,6 @@
     <ClInclude Include="KeyManager.hpp" />
     <ClInclude Include="Messages.hpp" />
     <ClInclude Include="ModelVehicle.h" />
-    <ClInclude Include="MyVehicle.h" />
     <ClInclude Include="Obstacle.hpp" />
     <ClInclude Include="ObstacleManager.hpp" />
     <ClInclude Include="Quaternion.hpp" />
@@ -187,6 +186,7 @@
     <ClInclude Include="TriPrism.h" />
     <ClInclude Include="VectorMaths.hpp" />
     <ClInclude Include="Vehicle.hpp" />
+    <ClInclude Include="Wheel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

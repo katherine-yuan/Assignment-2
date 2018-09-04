@@ -165,67 +165,6 @@ void drawGoals()
 //added this like we did in tutorial 6
 void testdraw() {
 	
-
-	/*
-	//TESTING RECTANGULAR PRISM
-	//input variables in order of x_, y_, z_, rotation_, length_, depth_, height_
-	RectPrism RectPrism1(0, 0, 0, 0, 10, 20, 5);	//call constructor to create rectangular prism
-	RectPrism1.draw();								//draw rectangular prism
-
-	//testing position
-	RectPrism RectPrism2(0, 30, 0, 0, 10, 20, 5);		//call constructor to create rectangular prism
-	RectPrism2.draw();									//draw rectangular prism
-
-	//testing rotation
-	RectPrism RectPrism3(-30, 0, 0, 90, 10, 20, 5);	//call constructor to create rectangular prism
-	RectPrism3.draw();									//draw rectangular prism
-	*/
-
-	/*
-	//TESTING CYLINDER
-	//input variables in order of x_, y_, z_, rotation_, radius_, innerRadius_, length_
-	Cylinder Cylinder1(0, 0, 0, 0, 10, 5, 15);			//call constructor to create a cylinder
-	Cylinder1.draw();									//draw cylinder
-	
-	//testing position
-	Cylinder Cylinder2(-20, 20, 0, 0, 10, 5, 15);		//call constructor to create a cylinder
-	Cylinder2.draw();									//draw cylinder
-	
-	//testing rotation
-	Cylinder Cylinder3(40, 0, 0, 90, 10, 5, 15);		//call constructor to create a cylinder
-	Cylinder3.draw();									//draw cylinder
-	*/
-
-	/*
-	//TESTING TRIANGULAR PRISM
-	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, theta_
-	TriPrism TriPrism1(0, 0, 0, 0, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
-	TriPrism1.draw();									//draw triangular prism
-	
-	//testing position: working
-	TriPrism TriPrism2(20, 0, 0, 0, 10, 5, 15, 3.14/3);		//call constructor to create triangular prism
-	TriPrism2.draw();										//draw triangular prism
-
-	//testing rotation: working
-	TriPrism TriPrism3(-20, 0, 0, 90, 10, 5, 15, 3.14/3);	//call constructor to create triangular prism
-	TriPrism3.draw();										//draw triangular prism
-	*/
-
-	/*
-	//TESTING TRAPEZOIDAL PRISM
-	//input variables in order of x_, y_, z_, rotation_, aLength_, bLength_, depth_, height_, offset_
-	TrapPrism TrapPrism1(0, 0, 0, 0, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
-	TrapPrism1.draw();									//draw trapezoidal prism
-	
-	//testing position: working
-	TrapPrism TrapPrism2(20, 0, 0, 0, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
-	TrapPrism2.draw();									//draw trapezoidal prism
-
-	//testing rotation: working
-	TrapPrism TrapPrism3(-30, 0, 0, 90, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
-	TrapPrism3.draw();										//draw trapezoidal prism
-	*/
-	
 	// TESTING MODELVEHICLE
 	// Try adding angle values (in degrees) to see the car move around.
 	ModelVehicle Car1(0, 0, 0, 0);
