@@ -53,15 +53,30 @@ void ModelVehicle::draw() {
 	double inRadius = 0;
 	double thickness = 1;
 
+	//Roof dimensions
+	double bottomLength = 20;
+	double topLength = 10;
+	double roofHeight = 5;
+	double roofOffset = 4;
+
+	//Spoiler dimensions
+	double spoilerSideLength = 2;
+	double spoilerBaseLenth = 4;
+	double spoilerTheta = 3.14 / 3;
+
 
 	// Move to the vehicle's local frame of reference
 	glPushMatrix();
 	positionInGL();
 
 	// Main body of vehicle
-	RectPrism mainBody(x, y+4, z, rotation, length, width, height);
+	RectPrism mainBody(x, y + 4, z, rotation, length, width, height);
 	mainBody.draw();
 
+	//Roof of vehicle
+	TrapPrism roof(x, y + 4 + height, z, rotation, bottomLength, topLength, width, roofHeight, roofOffset);
+	roof.draw();
+	
 	// Front wheels 
 	// Note that the right wheel must be rotated 180 degrees around the y axis for it to be in 
 	// the required orientation.
@@ -75,6 +90,10 @@ void ModelVehicle::draw() {
 	backRight.draw();
 	Cylinder backLeft(x - 11, y + 8, z - 11, rotation, backRadius, inRadius, thickness);
 	backLeft.draw();
+
+	//Spoiler
+	TriPrism spoiler(x - 13, y + 4 + height, z, rotation, spoilerBaseLenth, spoilerSideLength, width, spoilerTheta);
+	spoiler.draw();
 
 	//move back to global frame of reference
 	glPopMatrix();
