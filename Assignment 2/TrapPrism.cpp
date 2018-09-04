@@ -99,7 +99,6 @@ void TrapPrism::draw() {
 
 	glBegin(GL_QUADS);
 
-	setColor(0, 1, 0);	//set trapezoidal prism color to green
 	setColorInGL();
 
 	//base of the trapezoidal prism

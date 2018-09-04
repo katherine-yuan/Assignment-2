@@ -52,20 +52,17 @@ void Cylinder::draw() {
 	GLUquadricObj *cylinder = gluNewQuadric();
 
 	// Adjust centre to server shape specifications given - not needed
-	//glTranslatef(x, radius, -length / 2); //we need this to meet the specs, position InGL doesnt meet specs
+	glTranslatef(0, radius, 0); //we need this to meet the specs, position InGL doesnt meet specs
 
 	// Draw hollow cylinder body
-	setColor(0, 0.5, 1); // set colour to light blue
 	setColorInGL();
 	gluCylinder(cylinder, radius, radius, length, SLICES, STACKS);
 
 	// Draw caps using gluDisk
-	setColor(0, 0, 1); // set colour to blue
-
-	setColorInGL();
 	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS);
 
-	glTranslatef(0, 0, length); //changed this, moves to draw the back disk
+	//note: changed glTranslatef to glTranslated since we're using doubles
+	glTranslated(0, 0, length); //changed this, moves to draw the back disk
 	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS); //changed numbers to #defined versions here
 	
 	glPopMatrix();

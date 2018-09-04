@@ -237,10 +237,10 @@ void testdraw() {
 	
 	// TESTING MODELVEHICLE
 	// Try adding angle values (in degrees) to see the car move around.
-	ModelVehicle Car1(10, 10, 10, 90);
+	ModelVehicle Car1(-40, 0, 0, 0);
 	Car1.draw();
-	
-}
+		
+	}
 
 void display() {
 	frameCounter++;

@@ -35,7 +35,7 @@ RectPrism::RectPrism(double x_, double y_, double z_, double rotation_, double l
 	depth = depth_;
 	height = height_;
 
-	red = blue = green = 1.0;
+	red = blue = green = 1.0;	//set default colour to white
 }
 
 RectPrism::~RectPrism() {}
@@ -54,7 +54,6 @@ void RectPrism::draw() {
 	//trying to draw a rectangle
 	glBegin(GL_QUADS);
 
-	setColor(1, 0, 0.5);		//set color for rectangular prisms to pink
 	setColorInGL();
 
 	// base 
