@@ -115,8 +115,9 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	//vehicle = new MyVehicle();
-
+	//vehicle = new ModelVehicle();
+	//UNCOMMENT THE LINE ABOVE TO TEST DRIVING, USE ARROWKEYS
+	//@Bec, I changed MyVehicle to ModelVehicle above already
 
 	// add test obstacles
 	ObstacleManager::get()->addObstacle(Obstacle(10,10, 1));
@@ -163,7 +164,7 @@ void drawGoals()
 
 //added this like we did in tutorial 6
 void testdraw() {
-	//code here for testing
+	
 
 	/*
 	//TESTING RECTANGULAR PRISM
@@ -224,20 +225,10 @@ void testdraw() {
 	TrapPrism TrapPrism3(-30, 0, 0, 90, 8, 5, 12, 3, 1);	//call constructor to create trapezoidal prism
 	TrapPrism3.draw();										//draw trapezoidal prism
 	*/
-
-	/*
-	//TESTING MYVEHICLE
-	MyVehicle Vehicle1(0, 0, 0);
-	Vehicle1.draw();
-
-	MyVehicle Vehicle2(-50, 10, 10);
-	Vehicle2.draw();
-	*/
-	
 	
 	// TESTING MODELVEHICLE
 	// Try adding angle values (in degrees) to see the car move around.
-	ModelVehicle Car1(-40, 0, 0, 0);
+	ModelVehicle Car1(0, 0, 0, 0);
 	Car1.draw();
 		
 	}
