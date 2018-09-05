@@ -44,8 +44,7 @@ void RectPrism::draw() {
 
 	double halfLength = length / 2;
 	double halfDepth = depth / 2; 
-	//double base = y;
-	double base = 0; // i think it works with base = 0
+	double base = 0;
 
 	// Set position
 	glPushMatrix();

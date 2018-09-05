@@ -53,7 +53,7 @@ void ModelVehicle::draw() {
 	double inRadius = 0;
 	double thickness = 1;
 	double distToWheelsX = (length / 2) - frontRadius;
-	double distToWheelsZ = (width / 2) + thickness;
+	double distToWheelsZ = (width / 2) + (thickness / 2);
 
 	//Roof dimensions
 	double bottomLength = 20;

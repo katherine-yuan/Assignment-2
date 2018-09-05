@@ -43,6 +43,7 @@
 #include "TrapPrism.h"
 #include "RectPrism.h"
 #include "Cylinder.h"
+#include "Wheel.h"
 
 #include "MyVehicle.h"
 #include "ModelVehicle.h"
@@ -115,7 +116,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	//vehicle = new ModelVehicle();
+	vehicle = new ModelVehicle();
 	//UNCOMMENT THE LINE ABOVE TO TEST DRIVING, USE ARROWKEYS
 	//@Bec, I changed MyVehicle to ModelVehicle above already
 
@@ -169,7 +170,14 @@ void testdraw() {
 	// Try adding angle values (in degrees) to see the car move around.
 	ModelVehicle Car1(0, 0, 0, 0);
 	Car1.draw();
-		
+
+	/*
+	//TESTING WHEEL
+	Wheel Wheel1(0, 0, 0, 0, 3, 2, 1);
+	Wheel1.setColor(0, 0, 1);
+	Wheel1.draw();
+	*/
+	
 	}
 
 void display() {

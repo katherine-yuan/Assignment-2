@@ -1,6 +1,8 @@
 #include "Shape.hpp"
 #include "Cylinder.h"
+#include "RectPrism.h"
 #include "Wheel.h"
+
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -43,16 +45,19 @@ Wheel::~Wheel() {}
 
 void Wheel::draw() {
 
-	// Set position
-	glPushMatrix();
-	positionInGL();
-	setColorInGL();
-
 	Cylinder wheelRim(0, 0, 0, 0, radius, innerRadius, length);
 	wheelRim.draw();
 
+	RectPrism spoke1(0, radius - (length / 4), 0, 0, 2 * innerRadius, length, length / 2);
+	spoke1.draw();
 
-	glPopMatrix();
+	/*
+	RectPrism spoke2(0, radius - (length / 4), 0, 60, 2 * innerRadius, length, length / 2);
+	spoke2.draw();
+
+	RectPrism spoke3(0, radius - (length / 4), 0, -60, 2 * innerRadius, length, length / 2);
+	spoke3.draw();
+	*/
 }
 
 /* 
@@ -63,3 +68,6 @@ Also, with looking at bool isRolling; bool isSteering; use these to check if it 
 since it might be just a cylinder as part of the car and shouldn't rotate/steer. The back wheels also are supposed to rotate but not steer
 Not sure if we need to put these bool variables under Cylinder.h or Wheel.h though
 */
+
+//rotate about z-axis, steer about y-axis
+//angular velocity = linear velocity / radius

@@ -29,6 +29,7 @@ public:
 
 protected:
 	double aLength, bLength, depth, theta;
+	//theta is in radians
 };
 
 #endif // for MTRN2500_TRIPRISM_H
