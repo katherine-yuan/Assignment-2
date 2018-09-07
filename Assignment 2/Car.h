@@ -12,7 +12,7 @@ public:
 	Car(VehicleModel vehicleModel_);
 	~Car();	//destructor
 
-	void update(double dt);
+//	void update(double dt);
 
 	void draw();
 

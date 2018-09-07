@@ -47,10 +47,7 @@ Wheel::~Wheel() {}
 
 void Wheel::draw() {
 
-	glPushMatrix();
-	positionInGL();
-	setColorInGL();
-
+	/* THIS WAY DOESN'T LET YOU CHANGE COLOUR
 	glRotated(-rotation, 0, 1, 0);		// rotate about y
 
 	Cylinder wheelRim(0, 0, 0, 0, radius, innerRadius, length);
@@ -73,6 +70,37 @@ void Wheel::draw() {
 	RectPrism spoke3(0, - length / 4, 0, -60, 2 * innerRadius, SPOKE_WIDTH, length / 2);
 	spoke3.setColor(0.5, 0.5, 0.5);
 	spoke3.draw();
+	*/
+
+
+	//NEW WHEEL DRAWING TECHNIQUE
+	glPushMatrix();
+	positionInGL();
+	setColorInGL();
+
+	//glRotated(-rotation, 0, 1, 0);		// rotate about y
+
+
+	// Wheel rim
+	glPushMatrix();
+	// Create new cylinder object
+	GLUquadricObj *wheelRim = gluNewQuadric();
+
+	// Adjust to centre of base
+	glTranslatef(0, radius, -length / 2);
+
+	// Draw hollow cylinder body
+	gluCylinder(wheelRim, radius, radius, length, SLICES, STACKS);
+
+	// Draw caps using gluDisk
+	gluDisk(wheelRim, innerRadius, radius, SLICES, STACKS);
+	glTranslated(0, 0, length);			//moves to draw the back disk
+	gluDisk(wheelRim, innerRadius, radius, SLICES, STACKS);
+	glPopMatrix();
+
+	// Spokes
+	glPushMatrix();
+
 
 	glPopMatrix();
 }
