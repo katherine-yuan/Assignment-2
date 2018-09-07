@@ -11,7 +11,7 @@ public:
 	Shape(double x_, double y_, double z_, double rotation_);
 	virtual ~Shape();
 
-	virtual void draw() = 0; //abstract function
+	virtual void draw() = 0; //abstract function since it = 0, virtual allows you to redefine draw() in an inherited class
 
 	double getX();
 	double getY();

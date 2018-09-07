@@ -39,7 +39,7 @@ TriPrism::TriPrism(double x_, double y_, double z_, double rotation_, double aLe
 	depth = depth_;
 	theta = theta_;
 	
-	red = green = blue = 1.0;
+	red = green = blue = 1.0;		//set default colour to white
 };
 
 TriPrism::~TriPrism() {
@@ -89,7 +89,6 @@ void TriPrism::draw() {
 	double topLeftCornerX = aLengthHalf - bLength * cos(theta);
 	double topLeftCornerY = bLength * sin(theta);
 
-	setColor(1, 0, 0);							//set triangular prism colour to red
 	setColorInGL();
 
 	//DRAWING QUADS
