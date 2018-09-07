@@ -116,7 +116,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	//vehicle = new ModelVehicle();
+	vehicle = new ModelVehicle();
 	//UNCOMMENT THE LINE ABOVE TO TEST DRIVING, USE ARROWKEYS
 	//@Bec, I changed MyVehicle to ModelVehicle above already
 
@@ -166,13 +166,11 @@ void drawGoals()
 //added this like we did in tutorial 6
 void testdraw() {
 	
-	
+	/*
 	// TESTING MODELVEHICLE
 	// Try adding angle values (in degrees) to see the car move around.
-	ModelVehicle Car1(-40, 0, 0, 0);
+	ModelVehicle Car1(-40, 0, 0, 20);
 	Car1.draw();
-	
-
 	
 	//TESTING WHEEL
 	Wheel Wheel1(0, 0, 0, 0, 4, 3, 1);
@@ -184,7 +182,8 @@ void testdraw() {
 
 	Wheel Wheel3(-10, 0, 0, 20, 4, 3, 1);
 	Wheel3.draw();
-	
+	*/
+
 	}
 
 void display() {

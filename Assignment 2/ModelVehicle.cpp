@@ -69,7 +69,6 @@ void ModelVehicle::draw() {
 	double spoilerTheta = 3.14 / 3;
 	double distToSpoiler = (length / 2) - (spoilerBaseLength / 2);
 
-
 	// Move to the vehicle's local frame of reference
 	glPushMatrix();
 	positionInGL();
@@ -83,27 +82,6 @@ void ModelVehicle::draw() {
 	TrapPrism roof(x, y + frontRadius + height, z, rotation, bottomLength, topLength, width, roofHeight, roofOffset);
 	roof.setColor(1, 0, 1);				//set color to purple
 	roof.draw();
-
-	/*
-	// Front wheels 
-	// Note that the right wheel must be rotated 180 degrees around the y axis for it to be in 
-	// the required orientation.
-	Cylinder frontRight(x + distToWheelsX, y, z + distToWheelsZ, rotation + 180, frontRadius, inRadius, thickness);
-	frontRight.setColor(0, 0.5, 1);		//set colour to light blue
-	frontRight.draw();
-	
-	Cylinder frontLeft(x + distToWheelsX, y, z - distToWheelsZ, rotation, frontRadius, inRadius, thickness);
-	frontLeft.setColor(0, 0.5, 1);		//set colour to light blue
-	frontLeft.draw();
-
-	// Back wheels 
-	Cylinder backRight(x - distToWheelsX, y, z + distToWheelsZ, rotation + 180, backRadius, inRadius, thickness);
-	backRight.setColor(0, 0.5, 1);		//set colour to light blue
-	backRight.draw();
-	Cylinder backLeft(x - distToWheelsX, y, z - distToWheelsZ, rotation, backRadius, inRadius, thickness);
-	backLeft.setColor(0, 0.5, 1);		//set colour to light blue
-	backLeft.draw();
-	*/
 
 	// Front wheels 
 	Wheel frontRight(x + distToWheelsX, y, z + distToWheelsZ, 0, frontRadius, frontInnerRadius, thickness);
@@ -127,3 +105,25 @@ void ModelVehicle::draw() {
 	glPopMatrix();
 
 };
+
+/*
+// ORIGINAL WHEELS DRAWN USING CYLINDER
+// Front wheels
+// Note that the right wheel must be rotated 180 degrees around the y axis for it to be in
+// the required orientation.
+Cylinder frontRight(x + distToWheelsX, y, z + distToWheelsZ, rotation + 180, frontRadius, inRadius, thickness);
+frontRight.setColor(0, 0.5, 1);		//set colour to light blue
+frontRight.draw();
+
+Cylinder frontLeft(x + distToWheelsX, y, z - distToWheelsZ, rotation, frontRadius, inRadius, thickness);
+frontLeft.setColor(0, 0.5, 1);		//set colour to light blue
+frontLeft.draw();
+
+// Back wheels
+Cylinder backRight(x - distToWheelsX, y, z + distToWheelsZ, rotation + 180, backRadius, inRadius, thickness);
+backRight.setColor(0, 0.5, 1);		//set colour to light blue
+backRight.draw();
+Cylinder backLeft(x - distToWheelsX, y, z - distToWheelsZ, rotation, backRadius, inRadius, thickness);
+backLeft.setColor(0, 0.5, 1);		//set colour to light blue
+backLeft.draw();
+*/
