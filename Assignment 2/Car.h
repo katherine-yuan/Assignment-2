@@ -9,7 +9,7 @@ class Car : public Vehicle {
 public:
 
 	Car();	//default constructor
-	Car(VehicleModel vehicleModel_);
+	Car(VehicleModel vm_);
 	~Car();	//destructor
 
 	VehicleModel getVehicleModel();

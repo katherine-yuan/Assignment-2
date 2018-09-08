@@ -23,6 +23,17 @@ Cylinder::Cylinder() {
 	innerRadius = 0.0;
 	radius = 5;
 	length = 10;
+	x = y = z = 0.0;
+	rotation = 0.0;
+	red = green = blue = 1.0;
+}
+
+Cylinder::Cylinder(double radius_, double innerRadius_, double length_) {
+	radius = radius_;
+	innerRadius = innerRadius_;
+	length = length_;
+
+	x = y = z = 0.0;
 	rotation = 0.0;
 	red = green = blue = 1.0;
 }

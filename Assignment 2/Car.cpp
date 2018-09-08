@@ -27,6 +27,8 @@
 #include <GL/glut.h>
 #endif
 
+#define WHEEL_RADIUS_RATIO 0.8
+
 Car::Car() {
 
 	// Variables that dictate the dimensions of the car 
@@ -41,11 +43,16 @@ Car::Car() {
 	// Wheel dimensions:
 	double frontRadius = 4 * 0.5;
 	double backRadius = 8 * 0.5;
-	double frontInnerRadius = 3 * 0.5;
-	double backInnerRadius = 7 * 0.5;
+	//double frontInnerRadius = 3 * 0.5;
+	//double backInnerRadius = 7 * 0.5;
 	double thickness = 1 * 0.5;
 	double distToWheelsX = (length / 2) - frontRadius;
 	double distToWheelsZ = (width / 2) + (thickness / 2);
+	
+	bool frontRoll = 1;
+	bool frontSteer = 1;
+	bool backRoll = 1;
+	bool backSteer = 0;
 
 	// Roof dimensions
 	double bottomLength = 20 * 0.5;
@@ -54,15 +61,15 @@ Car::Car() {
 	double roofOffset = 4 * 0.5;
 
 	// Spoiler dimensions
-	double spoilerSideLength = 2 * 0.5;
+	double spoilerSideLength = 3 * 0.5;
 	double spoilerBaseLength = 4 * 0.5;
-	double spoilerTheta = 3.14 / 3;
+	double spoilerTheta = 3.14 / 8;
 	double distToSpoiler = (length / 2) - (spoilerBaseLength / 2);
 
 	vm.remoteID = 0;	//set ID to 0
 
 	// Main body of vehicle
-	ShapeParameter::RectangularParameters mainBodyParams{ length, width, height };
+	ShapeParameter::RectangularParameters mainBodyParams {length, width, height};
 	ShapeInit mainBody;
 	mainBody.type = RECTANGULAR_PRISM;
 	mainBody.params.rect = mainBodyParams;
@@ -76,7 +83,7 @@ Car::Car() {
 	vm.shapes.push_back(mainBody);
 
 	// Roof of vehicle
-	ShapeParameter::TrapezoidalParameters roofParams{ bottomLength, topLength, roofHeight, roofOffset, width };
+	ShapeParameter::TrapezoidalParameters roofParams {bottomLength, topLength, roofHeight, roofOffset, width};
 	ShapeInit roof;
 	roof.type = TRAPEZOIDAL_PRISM;
 	roof.params.trap = roofParams;
@@ -90,7 +97,7 @@ Car::Car() {
 	vm.shapes.push_back(roof);
 
 	// Spoiler
-	ShapeParameter::TriangularParameters spoilerParams{ spoilerBaseLength, spoilerSideLength, spoilerTheta, width };
+	ShapeParameter::TriangularParameters spoilerParams {spoilerBaseLength, spoilerSideLength, spoilerTheta, width};
 	ShapeInit spoiler;
 	spoiler.type = TRIANGULAR_PRISM;
 	spoiler.params.tri = spoilerParams;
@@ -98,30 +105,71 @@ Car::Car() {
 	spoiler.xyz[1] = frontRadius + height;
 	spoiler.xyz[2] = 0;
 	spoiler.rotation = 0;
-	spoiler.rgb[0] = 1;
+	spoiler.rgb[0] = 0.5;
 	spoiler.rgb[1] = 0;
-	spoiler.rgb[2] = 0;
+	spoiler.rgb[2] = 1;
 	vm.shapes.push_back(spoiler);
 
-	/*
-	// Will come back to do the wheels, need to fix Wheel.h and Wheel.cpp first
-	// Front wheels 
-	Wheel frontRight(x + distToWheelsX, y, z + distToWheelsZ, 0, frontRadius, frontInnerRadius, thickness);
-	frontRight.draw();
-	Wheel frontLeft(x + distToWheelsX, y, z - distToWheelsZ, 0, frontRadius, frontInnerRadius, thickness);
-	frontLeft.draw();
+	// Wheels
+	// Front Wheels
+	ShapeParameter::CylinderParameters frontWheelParams {frontRadius, thickness, frontRoll, frontSteer};
+	ShapeInit rightFront;
+	rightFront.type = CYLINDER;
+	rightFront.params.cyl = frontWheelParams;
+	rightFront.xyz[0] = distToWheelsX;
+	rightFront.xyz[1] = 0;
+	rightFront.xyz[2] = distToWheelsZ;
+	rightFront.rotation = 0;
+	rightFront.rgb[0] = 0.5;
+	rightFront.rgb[1] = 0.5;
+	rightFront.rgb[2] = 1;
+	vm.shapes.push_back(rightFront);
 
-	// Back wheels 
-	Wheel backRight(x - distToWheelsX, y, z + distToWheelsZ, 0, backRadius, backInnerRadius, thickness);
-	backRight.draw();
-	Wheel backLeft(x - distToWheelsX, y, z - distToWheelsZ, 0, backRadius, backInnerRadius, thickness);
-	backLeft.draw();
-	*/
+	ShapeInit leftFront;
+	leftFront.type = CYLINDER;
+	leftFront.params.cyl = frontWheelParams;
+	leftFront.xyz[0] = distToWheelsX;
+	leftFront.xyz[1] = 0;
+	leftFront.xyz[2] = -distToWheelsZ;
+	leftFront.rotation = 0;
+	leftFront.rgb[0] = 0.5;
+	leftFront.rgb[1] = 0.5;
+	leftFront.rgb[2] = 1;
+	vm.shapes.push_back(leftFront);
+
+	// Back Wheels
+	ShapeParameter::CylinderParameters backWheelParams {backRadius, thickness, backRoll, backSteer};
+	ShapeInit rightBack;
+	rightBack.type = CYLINDER;
+	rightBack.params.cyl = backWheelParams;
+	rightBack.xyz[0] = -distToWheelsX;
+	rightBack.xyz[1] = 0;
+	rightBack.xyz[2] = distToWheelsZ;
+	rightBack.rotation = 0;
+	rightBack.rgb[0] = 0.5;
+	rightBack.rgb[1] = 0.5;
+	rightBack.rgb[2] = 1;
+	vm.shapes.push_back(rightBack);
+
+	ShapeInit leftBack;
+	leftBack.type = CYLINDER;
+	leftBack.params.cyl = backWheelParams;
+	leftBack.xyz[0] = -distToWheelsX;
+	leftBack.xyz[1] = 0;
+	leftBack.xyz[2] = -distToWheelsZ;
+	leftBack.rotation = 0;
+	leftBack.rgb[0] = 0.5;
+	leftBack.rgb[1] = 0.5;
+	leftBack.rgb[2] = 1;
+	vm.shapes.push_back(leftBack);
 
 	shapeInitToShapes();
 };
 
-Car::Car(VehicleModel vehicleModel_) {
+Car::Car(VehicleModel vm_) {
+	vm = vm_;
+
+	shapeInitToShapes();
 };
 
 Car::~Car() {
@@ -179,9 +227,26 @@ void Car::shapeInitToShapes() {
 		}
 		case CYLINDER: {
 
-			//should be stuff about wheels and checking if wheel
-			//addShape(cyl);
-			break;
+			//check if cylinder is a wheel
+			if (vm.shapes[it].params.cyl.isRolling == true) {
+
+				Wheel* wheel = new Wheel(vm.shapes[it].params.cyl.radius, vm.shapes[it].params.cyl.radius * WHEEL_RADIUS_RATIO, vm.shapes[it].params.cyl.depth);
+				wheel->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
+				wheel->setRotation(vm.shapes[it].rotation);
+				wheel->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);
+				addShape(wheel);
+				break;
+				
+			} 
+			else 
+			{
+				Cylinder* cyl = new Cylinder(vm.shapes[it].params.cyl.radius, vm.shapes[it].params.cyl.radius * WHEEL_RADIUS_RATIO, vm.shapes[it].params.cyl.depth);
+				cyl->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
+				cyl->setRotation(vm.shapes[it].rotation);
+				cyl->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);
+				addShape(cyl);
+				break;
+			}
 		}
 		default: {
 			break;

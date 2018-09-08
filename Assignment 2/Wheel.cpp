@@ -30,6 +30,16 @@ Wheel::Wheel() {
 	red = green = blue = 1.0;
 }
 
+Wheel::Wheel(double radius_, double innerRadius_, double length_) {
+	radius = radius_;
+	innerRadius = innerRadius_;
+	length = length_;
+
+	x = y = z = 0.0;
+	rotation = 0.0;
+	red = green = blue = 1.0;
+}
+
 Wheel::Wheel(double x_, double y_, double z_, double rotation_, double radius_, double innerRadius_, double length_) {
 	x = x_;
 	y = y_;
