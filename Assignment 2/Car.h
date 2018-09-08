@@ -17,8 +17,9 @@ public:
 	void draw();
 
 protected:
-	VehicleModel vehicleModel;
-	VehicleState vehicleState;
+	VehicleModel vm;
+	VehicleState vs;
+	void shapeInitToShapes();
 
 };
 

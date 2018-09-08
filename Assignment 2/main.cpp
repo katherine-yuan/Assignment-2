@@ -47,6 +47,7 @@
 
 #include "MyVehicle.h"
 #include "ModelVehicle.h"
+#include "Car.h"
 
 void display();
 void reshape(int width, int height);
@@ -116,7 +117,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	//vehicle = new ModelVehicle();
+	vehicle = new Car();
 	//UNCOMMENT THE LINE ABOVE TO TEST DRIVING, USE ARROWKEYS
 	//@Bec, I changed MyVehicle to ModelVehicle above already
 
@@ -171,7 +172,7 @@ void testdraw() {
 	// Try adding angle values (in degrees) to see the car move around.
 	ModelVehicle Car1(-40, 0, 0, 20);
 	Car1.draw();
-	*/
+	
 
 	//TESTING WHEEL
 	Wheel Wheel1(0, 0, 0, 0, 4, 3, 1);
@@ -184,7 +185,7 @@ void testdraw() {
 
 	Wheel Wheel3(-10, 0, 0, 20, 4, 3, 1);
 	Wheel3.draw();
-	
+	*/
 
 	}
 
@@ -380,7 +381,7 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								//otherVehicles[vm.remoteID] = new MyVehicle();
+								//otherVehicles[vm.remoteID] = new Car();
 
 								//
 								// more student code goes here

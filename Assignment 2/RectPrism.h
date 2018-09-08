@@ -9,6 +9,7 @@ class RectPrism : public Shape {
 
 public:
 	RectPrism(); //default constructor
+	RectPrism(double length_, double depth_, double height_);
 	RectPrism(double x_, double y_, double z_,  double rotation_, double length_, double depth_, double height_);
 	~RectPrism(); // default destructor 
 

@@ -26,6 +26,17 @@ TriPrism::TriPrism() {
 	rotation = 0.0;
 	aLength = bLength = depth = theta = 0.0;
 	red = green = blue = 1.0;
+}
+
+TriPrism::TriPrism(double aLength_, double bLength_, double depth_, double theta_) {
+	aLength = aLength_;
+	bLength = bLength_;
+	depth = depth_;
+	theta = theta_;
+
+	x = y = z = 0.0;
+	rotation = 0.0;
+	red = green = blue = 1.0;		//set default colour to white
 };
 
 TriPrism::TriPrism(double x_, double y_, double z_, double rotation_, double aLength_, double bLength_, double depth_, double theta_) {

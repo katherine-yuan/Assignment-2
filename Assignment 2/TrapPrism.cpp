@@ -24,6 +24,18 @@ TrapPrism::TrapPrism() {
 	rotation = 0.0;
 	aLength = bLength = depth = height = offset = 0.0;
 	red = green = blue = 1.0;
+}
+
+TrapPrism::TrapPrism(double aLength_, double bLength_, double depth_, double height_, double offset_) {
+	aLength = aLength_;
+	bLength = bLength_;
+	depth = depth_;
+	height = height_;
+	offset = offset_;
+
+	x = y = z = 0.0;
+	rotation = 0.0;
+	red = green = blue = 1.0;
 };
 
 TrapPrism::TrapPrism(double x_, double y_, double z_, double rotation_, double aLength_, double bLength_, double depth_, double height_, double offset_) {

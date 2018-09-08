@@ -33,33 +33,33 @@ Car::Car() {
 	// (note given dimensions have been multiplied by 10 for better visualisation)
 
 	// Chasis dimensions:
-	double length = 30;
-	double width = 20;
-	double height = 10;
+	double length = 3;
+	double width = 2;
+	double height = 1;
 	double rotation = 0; // This needs to be here in order for rotation to work
 
 	// Wheel dimensions:
-	double frontRadius = 4;
-	double backRadius = 8;
-	double frontInnerRadius = 3;
-	double backInnerRadius = 7;
-	double thickness = 1;
+	double frontRadius = 0.4;
+	double backRadius = 0.8;
+	double frontInnerRadius = 0.3;
+	double backInnerRadius = 0.7;
+	double thickness = 0.1;
 	double distToWheelsX = (length / 2) - frontRadius;
 	double distToWheelsZ = (width / 2) + (thickness / 2);
 
 	// Roof dimensions
-	double bottomLength = 20;
-	double topLength = 10;
-	double roofHeight = 5;
-	double roofOffset = 4;
+	double bottomLength = 2;
+	double topLength = 1;
+	double roofHeight = 0.5;
+	double roofOffset = 0.4;
 
 	// Spoiler dimensions
-	double spoilerSideLength = 2;
-	double spoilerBaseLength = 4;
+	double spoilerSideLength = 0.2;
+	double spoilerBaseLength = 0.4;
 	double spoilerTheta = 3.14 / 3;
 	double distToSpoiler = (length / 2) - (spoilerBaseLength / 2);
 
-	vehicleModel.remoteID = 0;	//set ID to 0
+	vm.remoteID = 0;	//set ID to 0
 
 	// Main body of vehicle
 	ShapeParameter::RectangularParameters mainBodyParams{ length, width, height };
@@ -73,7 +73,7 @@ Car::Car() {
 	mainBody.rgb[0] = 1;
 	mainBody.rgb[1] = 0;
 	mainBody.rgb[2] = 0.5;
-	vehicleModel.shapes.push_back(mainBody);
+	vm.shapes.push_back(mainBody);
 
 	// Roof of vehicle
 	ShapeParameter::TrapezoidalParameters roofParams{ bottomLength, topLength, roofHeight, roofOffset, width };
@@ -87,7 +87,7 @@ Car::Car() {
 	roof.rgb[0] = 1;
 	roof.rgb[1] = 0;
 	roof.rgb[2] = 1;
-	vehicleModel.shapes.push_back(roof);
+	vm.shapes.push_back(roof);
 
 	// Spoiler
 	ShapeParameter::TriangularParameters spoilerParams{ spoilerBaseLength, spoilerSideLength, spoilerTheta, width };
@@ -101,8 +101,9 @@ Car::Car() {
 	spoiler.rgb[0] = 1;
 	spoiler.rgb[1] = 0;
 	spoiler.rgb[2] = 0;
-	vehicleModel.shapes.push_back(spoiler);
+	vm.shapes.push_back(spoiler);
 
+	/*
 	// Will come back to do the wheels, need to fix Wheel.h and Wheel.cpp first
 	// Front wheels 
 	Wheel frontRight(x + distToWheelsX, y, z + distToWheelsZ, 0, frontRadius, frontInnerRadius, thickness);
@@ -115,6 +116,9 @@ Car::Car() {
 	backRight.draw();
 	Wheel backLeft(x - distToWheelsX, y, z - distToWheelsZ, 0, backRadius, backInnerRadius, thickness);
 	backLeft.draw();
+	*/
+
+	shapeInitToShapes();
 };
 
 Car::Car(VehicleModel vehicleModel_) {
@@ -125,5 +129,52 @@ Car::~Car() {
 
 void Car::draw() {
 
+	std::vector<Shape *>::iterator it;
+
+	glPushMatrix();
+	positionInGL();
+
+	for (it = shapes.begin(); it != shapes.end(); it++) {
+		(*it)->draw();
+
+	}
+
+	glPopMatrix();
+
+};
+
+void Car::shapeInitToShapes() {
+	//this function converts ShapesInit vector into a Shapes vector so that the vehicle can be drawn
+
+	for (int it = 0; it < vm.shapes.size(); it++) { 
+		//iterate through the ShapesInit vector
+
+		switch (vm.shapes[it].type) {
+		case RECTANGULAR_PRISM: {
+			RectPrism* rect = new RectPrism(vm.shapes[it].params.rect.xlen, vm.shapes[it].params.rect.ylen, vm.shapes[it].params.rect.zlen);
+			rect->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
+			rect->setRotation(vm.shapes[it].rotation);
+			rect->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);
+			addShape(rect);
+			break;
+		}
+		case TRIANGULAR_PRISM: {
+			TriPrism* tri = new TriPrism(vm.shapes[it].params.tri.alen, vm.shapes[it].params.tri.blen, vm.shapes[it].params.tri.depth, vm.shapes[it].params.tri.angle);
+			tri->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
+			tri->setRotation(vm.shapes[it].rotation);
+			tri->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);
+			addShape(tri);
+			break;
+		}
+		case TRAPEZOIDAL_PRISM: {
+			TrapPrism* trap = new TrapPrism(vm.shapes[it].params.trap.alen, vm.shapes[it].params.trap.blen, vm.shapes[it].params.trap.depth, vm.shapes[it].params.trap.height, vm.shapes[it].params.trap.aoff);
+			trap->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
+			trap->setRotation(vm.shapes[it].rotation);
+			trap->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);
+			addShape(trap);
+			break;
+		}
+		}
+	}
 
 };
