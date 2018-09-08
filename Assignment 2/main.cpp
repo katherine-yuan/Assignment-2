@@ -117,7 +117,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	vehicle = new Car();
+	//vehicle = new Car();
 	//UNCOMMENT THE LINE ABOVE TO TEST DRIVING, USE ARROWKEYS
 	//@Bec, I changed MyVehicle to ModelVehicle above already
 
@@ -172,20 +172,20 @@ void testdraw() {
 	// Try adding angle values (in degrees) to see the car move around.
 	ModelVehicle Car1(-40, 0, 0, 20);
 	Car1.draw();
-	
+	*/
 
 	//TESTING WHEEL
-	Wheel Wheel1(0, 0, 0, 0, 4, 3, 1);
-	Wheel1.setColor(1, 0, 0); //Not sure why but this doesn't work so I've set the color inside Wheel.cpp
+	Wheel Wheel1(0, 0, 0, 0, 4, 3, 2);
+	Wheel1.setColor(1, 0, 0); 
 	Wheel1.draw();
 
 	Wheel Wheel2(10, 10, 10, 0, 4, 3, 1);
 	Wheel2.setColor(0, 1, 0);
 	Wheel2.draw();
 
-	Wheel Wheel3(-10, 0, 0, 20, 4, 3, 1);
+	Wheel Wheel3(-10, 0, 0, 20, 6, 4, 1);
 	Wheel3.draw();
-	*/
+	
 
 	}
 
@@ -334,7 +334,7 @@ void idle() {
 				otherVehicles.clear();
 
 				// uncomment this line to connect to the robotics server.
-				//RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
+				// RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
 
 				// on connect, let's tell the server what we look like
 				if (RemoteDataManager::IsConnected()) {
@@ -346,6 +346,7 @@ void idle() {
 					//
 					// student code goes here
 					//
+					// vm = dynamic_cast<Car*>(vehicle)->getVehicleModel();
 
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
@@ -381,11 +382,12 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								//otherVehicles[vm.remoteID] = new Car();
+								// otherVehicles[vm.remoteID] = new Car();
 
 								//
 								// more student code goes here
 								//
+
 							}
 							break;
 						}

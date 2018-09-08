@@ -12,6 +12,8 @@ public:
 	Car(VehicleModel vehicleModel_);
 	~Car();	//destructor
 
+	VehicleModel getVehicleModel();
+
 //	void update(double dt);
 
 	void draw();

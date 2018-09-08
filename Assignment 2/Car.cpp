@@ -30,32 +30,32 @@
 Car::Car() {
 
 	// Variables that dictate the dimensions of the car 
-	// (note given dimensions have been multiplied by 10 for better visualisation)
+	// (note given dimensions have been multiplied for better visualisation)
 
 	// Chasis dimensions:
-	double length = 3;
-	double width = 2;
-	double height = 1;
+	double length = 30 * 0.5;
+	double width = 20 * 0.5;
+	double height = 10 * 0.5;
 	double rotation = 0; // This needs to be here in order for rotation to work
 
 	// Wheel dimensions:
-	double frontRadius = 0.4;
-	double backRadius = 0.8;
-	double frontInnerRadius = 0.3;
-	double backInnerRadius = 0.7;
-	double thickness = 0.1;
+	double frontRadius = 4 * 0.5;
+	double backRadius = 8 * 0.5;
+	double frontInnerRadius = 3 * 0.5;
+	double backInnerRadius = 7 * 0.5;
+	double thickness = 1 * 0.5;
 	double distToWheelsX = (length / 2) - frontRadius;
 	double distToWheelsZ = (width / 2) + (thickness / 2);
 
 	// Roof dimensions
-	double bottomLength = 2;
-	double topLength = 1;
-	double roofHeight = 0.5;
-	double roofOffset = 0.4;
+	double bottomLength = 20 * 0.5;
+	double topLength = 10 * 0.5;
+	double roofHeight = 5 * 0.5;
+	double roofOffset = 4 * 0.5;
 
 	// Spoiler dimensions
-	double spoilerSideLength = 0.2;
-	double spoilerBaseLength = 0.4;
+	double spoilerSideLength = 2 * 0.5;
+	double spoilerBaseLength = 4 * 0.5;
 	double spoilerTheta = 3.14 / 3;
 	double distToSpoiler = (length / 2) - (spoilerBaseLength / 2);
 
@@ -125,6 +125,9 @@ Car::Car(VehicleModel vehicleModel_) {
 };
 
 Car::~Car() {
+}
+VehicleModel Car::getVehicleModel() {
+	return vm;
 };
 
 void Car::draw() {
@@ -172,6 +175,15 @@ void Car::shapeInitToShapes() {
 			trap->setRotation(vm.shapes[it].rotation);
 			trap->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);
 			addShape(trap);
+			break;
+		}
+		case CYLINDER: {
+
+			//should be stuff about wheels and checking if wheel
+			//addShape(cyl);
+			break;
+		}
+		default: {
 			break;
 		}
 		}
