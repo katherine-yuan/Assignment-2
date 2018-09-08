@@ -334,7 +334,7 @@ void idle() {
 				otherVehicles.clear();
 
 				// uncomment this line to connect to the robotics server.
-				// RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
+				RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
 
 				// on connect, let's tell the server what we look like
 				if (RemoteDataManager::IsConnected()) {
@@ -382,12 +382,20 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								// otherVehicles[vm.remoteID] = new Car();
+								otherVehicles[vm.remoteID] = new Car();
 
 								//
 								// more student code goes here
 								//
 
+								//Found the following on moodle forums, might be helpful? 
+								//The vehicle that is in the server with me is the one that has a set movement pattern, 
+								//so I’m pretty sure that’s the server vehicle.At this point it looks like an exact copy of my 
+								//custom vehicle that is moving by itself.
+								//Sounds like you are rendering the vehicle incorrectly.Are you filling out otherVehicles with
+								//the correct model from server message and are you drawing the correct model based on shapes in 
+								//the vehicle ?
+						
 							}
 							break;
 						}

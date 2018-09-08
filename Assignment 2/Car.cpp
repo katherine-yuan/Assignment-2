@@ -43,8 +43,6 @@ Car::Car() {
 	// Wheel dimensions:
 	double frontRadius = 4 * 0.5;
 	double backRadius = 8 * 0.5;
-	//double frontInnerRadius = 3 * 0.5;
-	//double backInnerRadius = 7 * 0.5;
 	double thickness = 1 * 0.5;
 	double distToWheelsX = (length / 2) - frontRadius;
 	double distToWheelsZ = (width / 2) + (thickness / 2);
@@ -63,7 +61,7 @@ Car::Car() {
 	// Spoiler dimensions
 	double spoilerSideLength = 3 * 0.5;
 	double spoilerBaseLength = 4 * 0.5;
-	double spoilerTheta = 3.14 / 8;
+	double spoilerTheta = PI / 8;
 	double distToSpoiler = (length / 2) - (spoilerBaseLength / 2);
 
 	vm.remoteID = 0;	//set ID to 0
@@ -173,9 +171,14 @@ Car::Car(VehicleModel vm_) {
 };
 
 Car::~Car() {
-}
+};
+
 VehicleModel Car::getVehicleModel() {
 	return vm;
+};
+
+VehicleState Car::getVehicleState() {
+	return vs;
 };
 
 void Car::draw() {

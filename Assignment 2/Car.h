@@ -4,6 +4,8 @@
 #include "Vehicle.hpp"
 #include "Messages.hpp"
 
+#define PI 3.14159265359
+
 class Car : public Vehicle {
 
 public:
@@ -13,6 +15,7 @@ public:
 	~Car();	//destructor
 
 	VehicleModel getVehicleModel();
+	VehicleState getVehicleState();
 
 //	void update(double dt);
 
