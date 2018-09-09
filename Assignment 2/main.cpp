@@ -168,12 +168,12 @@ void drawGoals()
 void testdraw() {
 	
 	/*
-	// TESTING MODELVEHICLE
-	// Try adding angle values (in degrees) to see the car move around.
-	ModelVehicle Car1(-40, 0, 0, 20);
-	Car1.draw();
-	
-
+	// TESTING TRIANGULAR PRISM
+	TriPrism Tri1(3, 2, 10, PI / 3);
+	Tri1.setColor(1, 0, 0);
+	Tri1.draw();
+	*/
+	/*
 	//TESTING WHEEL
 	Wheel Wheel1(0, 0, 0, 0, 4, 3, 2);
 	Wheel1.setColor(1, 0, 0); 
@@ -382,7 +382,7 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								otherVehicles[vm.remoteID] = new Car();
+								otherVehicles[vm.remoteID] = new Car(vm);
 
 								//
 								// more student code goes here

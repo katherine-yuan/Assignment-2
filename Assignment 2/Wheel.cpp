@@ -116,15 +116,3 @@ void Wheel::draw() {
 
 	glPopMatrix();
 }
-
-/* 
-So apparently we're supposed to use dynamic casting to identify wheels, and if they're wheels, make them rotate and steer
-Also, use "M" Message to interact with the server so we can draw our vehicle on the server. Supposed to use a vector of shapes to do this,
-with each shape in the vector being a struct containing the parameters for the shape
-Also, with looking at bool isRolling; bool isSteering; use these to check if it is a cylinder which is a wheel
-since it might be just a cylinder as part of the car and shouldn't rotate/steer. The back wheels also are supposed to rotate but not steer
-Not sure if we need to put these bool variables under Cylinder.h or Wheel.h though
-*/
-
-//rotate about z-axis, steer about y-axis
-//angular velocity = linear velocity / radius

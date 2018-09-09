@@ -20,7 +20,7 @@
 #include <GL/glut.h>
 #endif
 
-
+//Note: theta should be given in radians
 TriPrism::TriPrism() {
 	x = y = z = 0.0;
 	rotation = 0.0;
@@ -93,6 +93,8 @@ void TriPrism::draw() {
 	glPushMatrix();
 
 	positionInGL();
+	//glRotated(-90, 0, 0, 1);
+	//glTranslated(aLength / 2, 0, 0);
 
 	double aLengthHalf = aLength / 2;
 	double depthHalf = depth / 2;
