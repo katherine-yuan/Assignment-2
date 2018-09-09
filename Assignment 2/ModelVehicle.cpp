@@ -6,6 +6,7 @@
 #include "TriPrism.h"
 #include "TrapPrism.h"
 #include "Cylinder.h"
+#include "Wheel.h"
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -50,7 +51,8 @@ void ModelVehicle::draw() {
 	// Wheel dimensions:
 	double frontRadius = 4;
 	double backRadius = 8;
-	double inRadius = 0;
+	double frontInnerRadius = 3;
+	double backInnerRadius = 7;
 	double thickness = 1;
 	double distToWheelsX = (length / 2) - frontRadius;
 	double distToWheelsZ = (width / 2) + (thickness / 2);
@@ -67,7 +69,6 @@ void ModelVehicle::draw() {
 	double spoilerTheta = 3.14 / 3;
 	double distToSpoiler = (length / 2) - (spoilerBaseLength / 2);
 
-
 	// Move to the vehicle's local frame of reference
 	glPushMatrix();
 	positionInGL();
@@ -81,32 +82,48 @@ void ModelVehicle::draw() {
 	TrapPrism roof(x, y + frontRadius + height, z, rotation, bottomLength, topLength, width, roofHeight, roofOffset);
 	roof.setColor(1, 0, 1);				//set color to purple
 	roof.draw();
-	
+
 	// Front wheels 
-	// Note that the right wheel must be rotated 180 degrees around the y axis for it to be in 
-	// the required orientation.
-	Cylinder frontRight(x + distToWheelsX, y, z + distToWheelsZ, rotation + 180, frontRadius, inRadius, thickness);
-	frontRight.setColor(0, 0.5, 1); // set colour to light blue
+	Wheel frontRight(x + distToWheelsX, y, z + distToWheelsZ, 0, frontRadius, frontInnerRadius, thickness);
 	frontRight.draw();
-	
-	Cylinder frontLeft(x + distToWheelsX, y, z - distToWheelsZ, rotation, frontRadius, inRadius, thickness);
-	frontLeft.setColor(0, 0.5, 1); // set colour to light blue
+
+	Wheel frontLeft(x + distToWheelsX, y, z - distToWheelsZ, 0, frontRadius, frontInnerRadius, thickness);
 	frontLeft.draw();
 
 	// Back wheels 
-	Cylinder backRight(x - distToWheelsX, y, z + distToWheelsZ, rotation + 180, backRadius, inRadius, thickness);
-	backRight.setColor(0, 0.5, 1); // set colour to light blue
+	Wheel backRight(x - distToWheelsX, y, z + distToWheelsZ, 0, backRadius, backInnerRadius, thickness);
 	backRight.draw();
-	Cylinder backLeft(x - distToWheelsX, y, z - distToWheelsZ, rotation, backRadius, inRadius, thickness);
-	backLeft.setColor(0, 0.5, 1); // set colour to light blue
+	Wheel backLeft(x - distToWheelsX, y, z - distToWheelsZ, 0, backRadius, backInnerRadius, thickness);
 	backLeft.draw();
 
 	//Spoiler
 	TriPrism spoiler(x - distToSpoiler, y + frontRadius + height, z, rotation, spoilerBaseLength, spoilerSideLength, width, spoilerTheta);
-	spoiler.setColor(1, 0, 0);							//set colour to red
+	spoiler.setColor(1, 0, 0);			//set colour to red
 	spoiler.draw();
 
 	//move back to global frame of reference
 	glPopMatrix();
 
 };
+
+/*
+// ORIGINAL WHEELS DRAWN USING CYLINDER
+// Front wheels
+// Note that the right wheel must be rotated 180 degrees around the y axis for it to be in
+// the required orientation.
+Cylinder frontRight(x + distToWheelsX, y, z + distToWheelsZ, rotation + 180, frontRadius, inRadius, thickness);
+frontRight.setColor(0, 0.5, 1);		//set colour to light blue
+frontRight.draw();
+
+Cylinder frontLeft(x + distToWheelsX, y, z - distToWheelsZ, rotation, frontRadius, inRadius, thickness);
+frontLeft.setColor(0, 0.5, 1);		//set colour to light blue
+frontLeft.draw();
+
+// Back wheels
+Cylinder backRight(x - distToWheelsX, y, z + distToWheelsZ, rotation + 180, backRadius, inRadius, thickness);
+backRight.setColor(0, 0.5, 1);		//set colour to light blue
+backRight.draw();
+Cylinder backLeft(x - distToWheelsX, y, z - distToWheelsZ, rotation, backRadius, inRadius, thickness);
+backLeft.setColor(0, 0.5, 1);		//set colour to light blue
+backLeft.draw();
+*/

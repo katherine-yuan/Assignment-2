@@ -13,6 +13,7 @@ class Cylinder : public Shape {
 
 public:
 	Cylinder(); //default constructor
+	Cylinder(double radius_, double innerRadius_, double length_);
 	Cylinder(double x_, double y_, double z_, double rotation_, double radius_, double innerRadius_, double length_);
 	~Cylinder(); // default destructor 
 

@@ -21,8 +21,19 @@
 RectPrism::RectPrism() {
 	// Default constructor for this shape
 	length = depth = height = 0;
+	x = y = z = 0.0;
 	rotation = 0.0;
 	red = green = blue = 1.0;
+}
+
+RectPrism::RectPrism(double length_, double depth_, double height_) {
+	length = length_;
+	depth = depth_;
+	height = height_;
+
+	x = y = z = 0.0;
+	rotation = 0.0;
+	red = green = blue = 1.0;		//set default colour to white
 }
 
 RectPrism::RectPrism(double x_, double y_, double z_, double rotation_, double length_, double depth_, double height_) {

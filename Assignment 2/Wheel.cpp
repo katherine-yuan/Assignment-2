@@ -19,11 +19,23 @@
 #include <GL/glut.h>
 #endif
 
+#define SPOKE_WIDTH 1
+
 Wheel::Wheel() {
 	// Default constructor for this shape
 	innerRadius = 0.0;
 	radius = 5;
 	length = 10;
+	rotation = 0.0;
+	red = green = blue = 1.0;
+}
+
+Wheel::Wheel(double radius_, double innerRadius_, double length_) {
+	radius = radius_;
+	innerRadius = innerRadius_;
+	length = length_;
+
+	x = y = z = 0.0;
 	rotation = 0.0;
 	red = green = blue = 1.0;
 }
@@ -45,19 +57,64 @@ Wheel::~Wheel() {}
 
 void Wheel::draw() {
 
-	Cylinder wheelRim(0, 0, 0, 0, radius, innerRadius, length);
-	wheelRim.draw();
+	//NEW WHEEL DRAWING TECHNIQUE
+	glPushMatrix();
+	positionInGL();
+	setColorInGL();
 
-	RectPrism spoke1(0, radius - (length / 4), 0, 0, 2 * innerRadius, length, length / 2);
-	spoke1.draw();
+	// Adjust to centre of base
+	glTranslated(0, radius, -length / 2);
 
-	/*
-	RectPrism spoke2(0, radius - (length / 4), 0, 60, 2 * innerRadius, length, length / 2);
-	spoke2.draw();
+	// Wheel rim
+	glPushMatrix();
+	// Create new cylinder object
+	GLUquadricObj *wheelRim = gluNewQuadric();
+	// Draw hollow cylinder body
+	gluCylinder(wheelRim, radius, radius, length, SLICES, STACKS);
 
-	RectPrism spoke3(0, radius - (length / 4), 0, -60, 2 * innerRadius, length, length / 2);
-	spoke3.draw();
-	*/
+	// Draw caps using gluDisk
+	gluDisk(wheelRim, innerRadius, radius, SLICES, STACKS);
+	glTranslated(0, 0, length);			//moves to draw the back disk
+	gluDisk(wheelRim, innerRadius, radius, SLICES, STACKS);
+
+	glPopMatrix(); //at this point drawing origin is at the centre of the base of the wheel (where it touches the ground)
+
+	// Spokes
+	double spokeRadius = radius / 10;
+
+	//ensures that the spoke width is not wider than the width of the wheel rim
+	if (spokeRadius > length / 2) {
+		spokeRadius = length / 2; 
+	}
+
+	glPushMatrix();
+	glTranslated(0,  0, length / 2);			//move to the centre of the wheel
+	glRotated(90, 0, 1, 0);						//rotate about y-axis to move z-axis to original x-axis direction
+												//note that x-axis is now pointing out of the screen
+	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
+
+	glPushMatrix();
+	glRotated(180, 0, 1, 0);					//flip to draw second half of spoke
+	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotated(60, 1, 0, 0);						//rotate about x-axis to turn z-axis 60 degrees counter clockwise
+	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
+	glRotated(180, 0, 1, 0);					
+	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotated(-60, 1, 0, 0);					//rotate about x-axis to turn z-axis 60 degrees clockwise
+	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
+	glRotated(180, 0, 1, 0);
+	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
+	glPopMatrix();
+
+	glPopMatrix();
+
+	glPopMatrix();
 }
 
 /* 

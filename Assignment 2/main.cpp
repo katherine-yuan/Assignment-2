@@ -47,6 +47,7 @@
 
 #include "MyVehicle.h"
 #include "ModelVehicle.h"
+#include "Car.h"
 
 void display();
 void reshape(int width, int height);
@@ -116,7 +117,7 @@ int main(int argc, char ** argv) {
 	//   custom vehicle.
 	// -------------------------------------------------------------------------
 
-	vehicle = new ModelVehicle();
+	vehicle = new Car();
 	//UNCOMMENT THE LINE ABOVE TO TEST DRIVING, USE ARROWKEYS
 	//@Bec, I changed MyVehicle to ModelVehicle above already
 
@@ -166,18 +167,26 @@ void drawGoals()
 //added this like we did in tutorial 6
 void testdraw() {
 	
+	/*
 	// TESTING MODELVEHICLE
 	// Try adding angle values (in degrees) to see the car move around.
-	ModelVehicle Car1(0, 0, 0, 0);
+	ModelVehicle Car1(-40, 0, 0, 20);
 	Car1.draw();
-
-	/*
-	//TESTING WHEEL
-	Wheel Wheel1(0, 0, 0, 0, 3, 2, 1);
-	Wheel1.setColor(0, 0, 1);
-	Wheel1.draw();
-	*/
 	
+
+	//TESTING WHEEL
+	Wheel Wheel1(0, 0, 0, 0, 4, 3, 2);
+	Wheel1.setColor(1, 0, 0); 
+	Wheel1.draw();
+
+	Wheel Wheel2(10, 10, 10, 0, 4, 3, 1);
+	Wheel2.setColor(0, 1, 0);
+	Wheel2.draw();
+
+	Wheel Wheel3(-10, 0, 0, 20, 6, 4, 1);
+	Wheel3.draw();
+	*/
+
 	}
 
 void display() {
@@ -325,7 +334,7 @@ void idle() {
 				otherVehicles.clear();
 
 				// uncomment this line to connect to the robotics server.
-				//RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
+				RemoteDataManager::Connect("www.robotics.unsw.edu.au","18081");
 
 				// on connect, let's tell the server what we look like
 				if (RemoteDataManager::IsConnected()) {
@@ -337,6 +346,7 @@ void idle() {
 					//
 					// student code goes here
 					//
+					// vm = dynamic_cast<Car*>(vehicle)->getVehicleModel();
 
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
@@ -372,11 +382,20 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								//otherVehicles[vm.remoteID] = new MyVehicle();
+								otherVehicles[vm.remoteID] = new Car();
 
 								//
 								// more student code goes here
 								//
+
+								//Found the following on moodle forums, might be helpful? 
+								//The vehicle that is in the server with me is the one that has a set movement pattern, 
+								//so I’m pretty sure that’s the server vehicle.At this point it looks like an exact copy of my 
+								//custom vehicle that is moving by itself.
+								//Sounds like you are rendering the vehicle incorrectly.Are you filling out otherVehicles with
+								//the correct model from server message and are you drawing the correct model based on shapes in 
+								//the vehicle ?
+						
 							}
 							break;
 						}
@@ -473,7 +492,7 @@ void keydown(unsigned char key, int x, int y) {
 	//   in the idle function
 	KeyManager::get()->asciiKeyPressed(key);
 
-	// keys that react ocne when pressed rather than need to be held down
+	// keys that react once when pressed rather than need to be held down
 	//   can be handles normally, like this...
 	switch (key) {
 	case 27: // ESC key
