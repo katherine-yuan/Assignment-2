@@ -194,6 +194,25 @@ void Car::draw() {
 	}
 
 	glPopMatrix();
+	
+	// Bec - was trying to make the wheel rotate in draw with little success
+	//Wheel *wheelPtr = NULL;
+	//for (vector<Shape*>::iterator it = shapes.begin(); it != shapes.end(); it++) {
+	//	glPushMatrix();
+	//	positionInGl();
+	//	wheelPtr = dynamic_cast<Wheel*> (*it);
+	//	if (wheelPtr->Steering()) {
+	//		wheelPtr->setSteer(-steering); // is this the right variable
+	//	}
+	//	else {
+	//		wheelPtr->setSteer(0);
+	//	}
+	//	if (wheelPtr->Rolling()) {
+	//		wheelPtr->setRoll(//soeed*5)
+	//	}
+	//	(*it)->draw();
+	//	glPopMatrix();
+	//}
 
 };
 
