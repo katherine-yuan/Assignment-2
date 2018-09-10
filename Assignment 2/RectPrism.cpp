@@ -26,7 +26,7 @@ RectPrism::RectPrism() {
 	red = green = blue = 1.0;
 }
 
-RectPrism::RectPrism(double length_, double depth_, double height_) {
+RectPrism::RectPrism(double length_, double height_, double depth_) {
 	length = length_;
 	depth = depth_;
 	height = height_;

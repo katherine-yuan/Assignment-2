@@ -34,16 +34,16 @@ Car::Car() {
 	// Variables that dictate the dimensions of the car 
 	// (note given dimensions have been multiplied for better visualisation)
 
-	// Chasis dimensions:
-	double length = 30 * 0.5;
-	double width = 20 * 0.5;
-	double height = 10 * 0.5;
+	// Main Body dimensions:
+	double length = 30 * 0.1;
+	double width = 20 * 0.1;
+	double height = 10 * 0.1;
 	double rotation = 0; // This needs to be here in order for rotation to work
 
 	// Wheel dimensions:
-	double frontRadius = 4 * 0.5;
-	double backRadius = 8 * 0.5;
-	double thickness = 1 * 0.5;
+	double frontRadius = 4 * 0.1;
+	double backRadius = 8 * 0.1;
+	double thickness = 1 * 0.1;
 	double distToWheelsX = (length / 2) - frontRadius;
 	double distToWheelsZ = (width / 2) + (thickness / 2);
 	
@@ -53,21 +53,21 @@ Car::Car() {
 	bool backSteer = 0;
 
 	// Roof dimensions
-	double bottomLength = 20 * 0.5;
-	double topLength = 10 * 0.5;
-	double roofHeight = 5 * 0.5;
-	double roofOffset = 4 * 0.5;
+	double bottomLength = 20 * 0.1;
+	double topLength = 10 * 0.1;
+	double roofHeight = 5 * 0.1;
+	double roofOffset = 4 * 0.1;
 
 	// Spoiler dimensions
-	double spoilerSideLength = 3 * 0.5;
-	double spoilerBaseLength = 4 * 0.5;
-	double spoilerTheta = PI / 8;
+	double spoilerSideLength = 3 * 0.1;
+	double spoilerBaseLength = 4 * 0.1;
+	double spoilerTheta = 25;	//given in degrees
 	double distToSpoiler = (length / 2) - (spoilerBaseLength / 2);
 
 	vm.remoteID = 0;	//set ID to 0
 
 	// Main body of vehicle
-	ShapeParameter::RectangularParameters mainBodyParams {length, width, height};
+	ShapeParameter::RectangularParameters mainBodyParams {length, height, width};
 	ShapeInit mainBody;
 	mainBody.type = RECTANGULAR_PRISM;
 	mainBody.params.rect = mainBodyParams;
@@ -188,9 +188,8 @@ void Car::draw() {
 	glPushMatrix();
 	positionInGL();
 
-	for (it = shapes.begin(); it != shapes.end(); it++) {
-		(*it)->draw();
-
+	for (int i = 0; i < shapes.size(); i++) {
+		shapes[i]->draw();
 	}
 
 	glPopMatrix();
@@ -232,9 +231,9 @@ void Car::shapeInitToShapes() {
 			break;
 		}
 		case TRIANGULAR_PRISM: {
-			TriPrism* tri = new TriPrism(vm.shapes[it].params.tri.alen, vm.shapes[it].params.tri.blen, vm.shapes[it].params.tri.depth, vm.shapes[it].params.tri.angle);
+			TriPrism* tri = new TriPrism(vm.shapes[it].params.tri.alen, vm.shapes[it].params.tri.blen, vm.shapes[it].params.tri.depth, vm.shapes[it].params.tri.angle * (PI/180));
 			tri->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
-			tri->setRotation(vm.shapes[it].rotation);
+			tri->setRotation(vm.shapes[it].rotation + 180);
 			tri->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);
 			addShape(tri);
 			break;
@@ -242,7 +241,7 @@ void Car::shapeInitToShapes() {
 		case TRAPEZOIDAL_PRISM: {
 			TrapPrism* trap = new TrapPrism(vm.shapes[it].params.trap.alen, vm.shapes[it].params.trap.blen, vm.shapes[it].params.trap.depth, vm.shapes[it].params.trap.height, vm.shapes[it].params.trap.aoff);
 			trap->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
-			trap->setRotation(vm.shapes[it].rotation);
+			trap->setRotation(vm.shapes[it].rotation + 180);
 			trap->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);
 			addShape(trap);
 			break;

@@ -104,7 +104,7 @@ void TrapPrism::draw() {
 
 	double topLeftCornerX = aLengthHalf - offset;
 	double topRightCornerX = aLengthHalf - offset - bLength;
-	
+
 	glPushMatrix();
 
 	positionInGL();		//set position

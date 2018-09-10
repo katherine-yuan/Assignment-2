@@ -168,12 +168,12 @@ void drawGoals()
 void testdraw() {
 	
 	/*
-	// TESTING MODELVEHICLE
-	// Try adding angle values (in degrees) to see the car move around.
-	ModelVehicle Car1(-40, 0, 0, 20);
-	Car1.draw();
-	
-
+	// TESTING TRIANGULAR PRISM
+	TriPrism Tri1(3, 2, 10, PI / 3);
+	Tri1.setColor(1, 0, 0);
+	Tri1.draw();
+	*/
+	/*
 	//TESTING WHEEL
 	Wheel Wheel1(0, 0, 0, 0, 4, 3, 2);
 	Wheel1.setColor(1, 0, 0); 
@@ -343,10 +343,8 @@ void idle() {
 					VehicleModel vm;
 					vm.remoteID = 0;
 
-					//
-					// student code goes here
-					//
-					// vm = dynamic_cast<Car*>(vehicle)->getVehicleModel();
+					vm = dynamic_cast<Car*>(vehicle)->getVehicleModel();
+
 
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
@@ -382,19 +380,7 @@ void idle() {
 								VehicleModel vm = models[i];
 								
 								// uncomment the line below to create remote vehicles
-								otherVehicles[vm.remoteID] = new Car();
-
-								//
-								// more student code goes here
-								//
-
-								//Found the following on moodle forums, might be helpful? 
-								//The vehicle that is in the server with me is the one that has a set movement pattern, 
-								//so I’m pretty sure that’s the server vehicle.At this point it looks like an exact copy of my 
-								//custom vehicle that is moving by itself.
-								//Sounds like you are rendering the vehicle incorrectly.Are you filling out otherVehicles with
-								//the correct model from server message and are you drawing the correct model based on shapes in 
-								//the vehicle ?
+								otherVehicles[vm.remoteID] = new Car(vm);
 						
 							}
 							break;
