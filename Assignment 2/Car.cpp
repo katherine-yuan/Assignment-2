@@ -61,7 +61,7 @@ Car::Car() {
 	// Spoiler dimensions
 	double spoilerSideLength = 3 * 0.1;
 	double spoilerBaseLength = 4 * 0.1;
-	double spoilerTheta = PI / 8;
+	double spoilerTheta = 25;	//given in degrees
 	double distToSpoiler = (length / 2) - (spoilerBaseLength / 2);
 
 	vm.remoteID = 0;	//set ID to 0
@@ -212,9 +212,9 @@ void Car::shapeInitToShapes() {
 			break;
 		}
 		case TRIANGULAR_PRISM: {
-			TriPrism* tri = new TriPrism(vm.shapes[it].params.tri.alen, vm.shapes[it].params.tri.blen, vm.shapes[it].params.tri.depth, vm.shapes[it].params.tri.angle);
+			TriPrism* tri = new TriPrism(vm.shapes[it].params.tri.alen, vm.shapes[it].params.tri.blen, vm.shapes[it].params.tri.depth, vm.shapes[it].params.tri.angle * (PI/180));
 			tri->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
-			tri->setRotation(vm.shapes[it].rotation);
+			tri->setRotation(vm.shapes[it].rotation + 180);
 			tri->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);
 			addShape(tri);
 			break;
@@ -222,7 +222,7 @@ void Car::shapeInitToShapes() {
 		case TRAPEZOIDAL_PRISM: {
 			TrapPrism* trap = new TrapPrism(vm.shapes[it].params.trap.alen, vm.shapes[it].params.trap.blen, vm.shapes[it].params.trap.depth, vm.shapes[it].params.trap.height, vm.shapes[it].params.trap.aoff);
 			trap->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
-			trap->setRotation(vm.shapes[it].rotation);
+			trap->setRotation(vm.shapes[it].rotation + 180);
 			trap->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);
 			addShape(trap);
 			break;

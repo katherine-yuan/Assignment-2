@@ -94,7 +94,7 @@ void TriPrism::draw() {
 
 	positionInGL();
 	//glRotated(-90, 0, 0, 1);
-	//glTranslated(aLength / 2, 0, 0);
+	//glTranslated(bLength*sin(theta), 0, 0);
 
 	double aLengthHalf = aLength / 2;
 	double depthHalf = depth / 2;
