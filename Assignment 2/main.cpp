@@ -345,6 +345,7 @@ void idle() {
 
 					vm = dynamic_cast<Car*>(vehicle)->getVehicleModel();
 
+
 					RemoteDataManager::Write(GetVehicleModelStr(vm));
 				}
 			}
