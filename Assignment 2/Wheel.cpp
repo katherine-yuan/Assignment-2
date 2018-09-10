@@ -161,6 +161,8 @@ void Wheel::draw() {
 	glPopMatrix();
 }
 
+// This should be set to the value of steering from the Vehicle class. 
+// It should be called and updated every time the vehicle moves
 void Wheel::setSteer(double steering) {
 	steeringAngle = steering;
 }
