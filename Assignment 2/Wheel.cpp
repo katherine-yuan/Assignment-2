@@ -28,6 +28,10 @@ Wheel::Wheel() {
 	length = 10;
 	rotation = 0.0;
 	red = green = blue = 1.0;
+
+	wheelSpeed = 0;
+	isSteering = 0;
+	isRolling = 0;
 }
 
 Wheel::Wheel(double radius_, double innerRadius_, double length_) {
@@ -38,6 +42,7 @@ Wheel::Wheel(double radius_, double innerRadius_, double length_) {
 	x = y = z = 0.0;
 	rotation = 0.0;
 	red = green = blue = 1.0;
+
 }
 
 Wheel::Wheel(double x_, double y_, double z_, double rotation_, double radius_, double innerRadius_, double length_) {
@@ -53,7 +58,25 @@ Wheel::Wheel(double x_, double y_, double z_, double rotation_, double radius_, 
 	red = blue = green = 1.0;
 }
 
+Wheel::Wheel(double radius_, double innerRadius_, double length_, double wheelSpeed_, bool isSteering_, bool isRolling_) {
+	radius = radius_;
+	innerRadius = innerRadius_;
+	length = length_;
+
+	wheelSpeed = wheelSpeed_;
+	isSteering = isSteering_;
+	isRolling = isRolling_;
+}
+
 Wheel::~Wheel() {}
+
+bool Wheel::Steering() {
+	return isSteering;
+}
+
+bool Wheel::Rolling() {
+	return isRolling;
+}
 
 void Wheel::draw() {
 
@@ -62,8 +85,20 @@ void Wheel::draw() {
 	positionInGL();
 	setColorInGL();
 
-	// Adjust to centre of base
+
+	// Adjust to centre of base - should this be before or after
 	glTranslated(0, radius, -length / 2);
+
+	// Rotate axis accordingly
+	if (isSteering) {
+		glRotatef(steeringAngle, 0, 1, 0);
+	}
+	if (isRolling) {
+		glTranslatef(0, radius, 0);
+		glRotatef(-wheelSpeed, 0, 0, 1);
+		glTranslatef(0, -radius, 0);
+	}
+
 
 	// Wheel rim
 	glPushMatrix();
@@ -72,10 +107,13 @@ void Wheel::draw() {
 	// Draw hollow cylinder body
 	gluCylinder(wheelRim, radius, radius, length, SLICES, STACKS);
 
-	// Draw caps using gluDisk
-	gluDisk(wheelRim, innerRadius, radius, SLICES, STACKS);
+	// Draw caps using gluDisk - maybe don't need to make cap1 object, just attatch to wheel rim pointer
+	GLUquadricObj *cap1 = gluNewQuadric();
+	gluDisk(cap1, innerRadius, radius, SLICES, STACKS);
+	glPushMatrix();
 	glTranslated(0, 0, length);			//moves to draw the back disk
-	gluDisk(wheelRim, innerRadius, radius, SLICES, STACKS);
+	GLUquadricObj *cap2 = gluNewQuadric();
+	gluDisk(cap2, innerRadius, radius, SLICES, STACKS);
 
 	glPopMatrix(); //at this point drawing origin is at the centre of the base of the wheel (where it touches the ground)
 
@@ -91,6 +129,8 @@ void Wheel::draw() {
 	glTranslated(0,  0, length / 2);			//move to the centre of the wheel
 	glRotated(90, 0, 1, 0);						//rotate about y-axis to move z-axis to original x-axis direction
 												//note that x-axis is now pointing out of the screen
+	//GLUquadricObj *spoke1 = gluNewQuadric();
+
 	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
 
 	glPushMatrix();
@@ -98,23 +138,46 @@ void Wheel::draw() {
 	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
 	glPopMatrix();
 
-	glPushMatrix();
-	glRotated(60, 1, 0, 0);						//rotate about x-axis to turn z-axis 60 degrees counter clockwise
-	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
-	glRotated(180, 0, 1, 0);					
-	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
+	////GLUquadricObj *spoke2 = gluNewQuadric();
+
+	//glPushMatrix();
+	//glRotated(60, 1, 0, 0);						//rotate about x-axis to turn z-axis 60 degrees counter clockwise
+	//gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
+	//glRotated(180, 0, 1, 0);					
+	//gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
+	//glPopMatrix();
+
+	////GLUquadricObj *spoke3 = gluNewQuadric();
+
+	//glPushMatrix();
+	//glRotated(-60, 1, 0, 0);					//rotate about x-axis to turn z-axis 60 degrees clockwise
+	//gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
+	//glRotated(180, 0, 1, 0);
+	//gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
+	//glPopMatrix();
+
 	glPopMatrix();
 
-	glPushMatrix();
-	glRotated(-60, 1, 0, 0);					//rotate about x-axis to turn z-axis 60 degrees clockwise
-	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
-	glRotated(180, 0, 1, 0);
-	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
 	glPopMatrix();
+}
 
-	glPopMatrix();
+void Wheel::setSteer(double steering) {
+	steeringAngle = steering;
+}
 
-	glPopMatrix();
+void Wheel::setRoll(double roll_) {
+	wheelSpeed = roll_; //+ wheelSpeed;
+}
+
+void Wheel::rotateY() {
+	glRotatef(steeringAngle, 0, 1, 0);
+}
+
+double Wheel::getRadius() {
+	return radius;
+}
+double Wheel::getLength() {
+	return length;
 }
 
 /* 
