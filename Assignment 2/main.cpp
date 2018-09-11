@@ -118,8 +118,6 @@ int main(int argc, char ** argv) {
 	// -------------------------------------------------------------------------
 
 	vehicle = new Car();
-	//UNCOMMENT THE LINE ABOVE TO TEST DRIVING, USE ARROWKEYS
-	//@Bec, I changed MyVehicle to ModelVehicle above already
 
 	// add test obstacles
 	ObstacleManager::get()->addObstacle(Obstacle(10,10, 1));

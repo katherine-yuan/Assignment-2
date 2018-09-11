@@ -179,39 +179,69 @@ VehicleModel Car::getVehicleModel() {
 
 VehicleState Car::getVehicleState() {
 	return vs;
-};
+}
+
+
+void Car::update(double dt) {
+	speed = clamp(MAX_BACKWARD_SPEED_MPS, speed, MAX_FORWARD_SPEED_MPS);
+	steering = clamp(MAX_LEFT_STEERING_DEGS, steering, MAX_RIGHT_STEERING_DEGS);
+
+	// update position by integrating the speed
+	x += speed * dt * cos(rotation * PI / 180.0);
+	z += speed * dt * sin(rotation * PI / 180.0);
+
+	// update heading
+	rotation += dt * steering * speed;
+
+	while (rotation > 360) rotation -= 360;
+	while (rotation < 0) rotation += 360;
+	
+	if (fabs(speed) < .1)
+		speed = 0;
+	if (fabs(steering) < .1)
+		steering = 0;
+
+}
 
 void Car::draw() {
 
 	std::vector<Shape *>::iterator it;
 
-	glPushMatrix();
-	positionInGL();
-
 	for (int i = 0; i < shapes.size(); i++) {
-		shapes[i]->draw();
-	}
 
-	glPopMatrix();
-	
-	// Bec - was trying to make the wheel rotate in draw with little success
-	//Wheel *wheelPtr = NULL;
-	//for (vector<Shape*>::iterator it = shapes.begin(); it != shapes.end(); it++) {
-	//	glPushMatrix();
-	//	positionInGl();
-	//	wheelPtr = dynamic_cast<Wheel*> (*it);
-	//	if (wheelPtr->Steering()) {
-	//		wheelPtr->setSteer(-steering); // is this the right variable
-	//	}
-	//	else {
-	//		wheelPtr->setSteer(0);
-	//	}
-	//	if (wheelPtr->Rolling()) {
-	//		wheelPtr->setRoll(//soeed*5)
-	//	}
-	//	(*it)->draw();
-	//	glPopMatrix();
-	//}
+		glPushMatrix();
+		positionInGL();
+		
+		Wheel *wheelPtr = NULL;
+		wheelPtr = dynamic_cast<Wheel*>(shapes[i]);
+
+		//check if shape is a wheel
+		if (wheelPtr != NULL) {
+
+			//check if wheel should be steering
+			if (wheelPtr->Steering()) {
+				glPushMatrix();
+				shapes[i]->setRotation(steering);
+				glPopMatrix();
+			}
+
+			//make it rotate
+			if (wheelPtr->Rolling()) {
+				glPushMatrix();
+				wheelPtr->setRoll(speed * 2);
+				shapes[i]->draw();
+
+				glPopMatrix();
+			}
+
+
+		} else {
+			shapes[i]->draw();
+		}
+
+		glPopMatrix();
+
+	}
 
 };
 
@@ -251,7 +281,7 @@ void Car::shapeInitToShapes() {
 			//check if cylinder is a wheel
 			if (vm.shapes[it].params.cyl.isRolling == true) {
 
-				Wheel* wheel = new Wheel(vm.shapes[it].params.cyl.radius, vm.shapes[it].params.cyl.radius * WHEEL_RADIUS_RATIO, vm.shapes[it].params.cyl.depth);
+				Wheel* wheel = new Wheel(vm.shapes[it].params.cyl.radius, vm.shapes[it].params.cyl.radius * WHEEL_RADIUS_RATIO, vm.shapes[it].params.cyl.depth, vs.speed, vm.shapes[it].params.cyl.isSteering, vm.shapes[it].params.cyl.isRolling);
 				wheel->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
 				wheel->setRotation(vm.shapes[it].rotation);
 				wheel->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);
