@@ -58,7 +58,7 @@ Wheel::Wheel(double x_, double y_, double z_, double rotation_, double radius_, 
 	red = blue = green = 1.0;
 }
 
-Wheel::Wheel(double radius_, double innerRadius_, double length_, double wheelSpeed_, bool isSteering_, bool isRolling_, double angle_) {
+Wheel::Wheel(double radius_, double innerRadius_, double length_, double wheelSpeed_, bool isSteering_, bool isRolling_) {
 	radius = radius_;
 	innerRadius = innerRadius_;
 	length = length_;
@@ -66,7 +66,7 @@ Wheel::Wheel(double radius_, double innerRadius_, double length_, double wheelSp
 	wheelSpeed = wheelSpeed_;
 	isSteering = isSteering_;
 	isRolling = isRolling_;
-	angle = angle_;
+
 }
 
 Wheel::~Wheel() {}
@@ -84,88 +84,6 @@ void Wheel::draw() {
 	glPushMatrix();
 	positionInGL();
 	setColorInGL();
-
-	/*
-	// Adjust to centre of base - should this be before or after
-	glTranslated(0, radius, -length / 2);
-	*/
-
-	/*
-	// Rotate axis accordingly
-	if (isSteering) {
-	glRotatef(steeringAngle, 0, 1, 0);
-	}
-	if (isRolling) {
-	glTranslatef(0, radius, 0);
-	glRotatef(-wheelSpeed, 0, 0, 1);
-	glTranslatef(0, -radius, 0);
-	}
-	*/
-
-	/*
-	// Wheel rim
-	glPushMatrix();
-	// Create new cylinder object
-	GLUquadricObj *wheelRim = gluNewQuadric();
-	// Draw hollow cylinder body
-	gluCylinder(wheelRim, radius, radius, length, SLICES, STACKS);
-
-	// Draw caps using gluDisk - maybe don't need to make cap1 object, just attatch to wheel rim pointer
-	GLUquadricObj *cap1 = gluNewQuadric();
-	gluDisk(cap1, innerRadius, radius, SLICES, STACKS);
-	glPushMatrix();
-	glTranslated(0, 0, length);			//moves to draw the back disk
-	GLUquadricObj *cap2 = gluNewQuadric();
-	gluDisk(cap2, innerRadius, radius, SLICES, STACKS);
-
-	glPopMatrix(); //at this point drawing origin is at the centre of the base of the wheel (where it touches the ground)
-
-	// Spokes
-	double spokeRadius = radius / 10;
-
-	//ensures that the spoke width is not wider than the width of the wheel rim
-	if (spokeRadius > length / 2) {
-	spokeRadius = length / 2;
-	}
-
-	glPushMatrix();
-	glTranslated(0,  0, length / 2);			//move to the centre of the wheel
-	glRotated(90, 0, 1, 0);						//rotate about y-axis to move z-axis to original x-axis direction
-	//note that x-axis is now pointing out of the screen
-	//GLUquadricObj *spoke1 = gluNewQuadric();
-
-	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
-
-	glPushMatrix();
-	glRotated(180, 0, 1, 0);					//flip to draw second half of spoke
-	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
-	glPopMatrix();
-
-	//GLUquadricObj *spoke2 = gluNewQuadric();
-
-	glPushMatrix();
-	glRotated(60, 1, 0, 0);						//rotate about x-axis to turn z-axis 60 degrees counter clockwise
-	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
-	glRotated(180, 0, 1, 0);
-	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
-	glPopMatrix();
-
-	//GLUquadricObj *spoke3 = gluNewQuadric();
-
-	glPushMatrix();
-	glRotated(-60, 1, 0, 0);					//rotate about x-axis to turn z-axis 60 degrees clockwise
-	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
-	glRotated(180, 0, 1, 0);
-	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
-	glPopMatrix();
-
-	glPopMatrix();
-
-	glPopMatrix();
-	}
-
-	*/
-
 
 	// Adjust to centre of base
 	glTranslated(0, radius, -length / 2);
@@ -196,7 +114,7 @@ void Wheel::draw() {
 	glRotated(90, 0, 1, 0);						//rotate about y-axis to move z-axis to original x-axis direction
 	
 	//rotate wheel about x
-	glRotated(angle, 1, 0, 0);
+	glRotated(wheelSpeed, 1, 0, 0);
 												//note that x-axis is now pointing out of the screen
 	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
 
@@ -227,21 +145,7 @@ void Wheel::draw() {
 
 // This should be set to the value of steering from the Vehicle class. 
 // It should be called and updated every time the vehicle moves
-void Wheel::setSteer(double steering) {
-	steeringAngle = steering;
+void Wheel::setRoll(double speed) {
+	wheelSpeed = speed + wheelSpeed;
 }
 
-void Wheel::setRoll(double roll_) {
-	wheelSpeed = roll_; //+ wheelSpeed;
-}
-
-void Wheel::rotateY() {
-	glRotatef(steeringAngle, 0, 1, 0);
-}
-
-double Wheel::getRadius() {
-	return radius;
-}
-double Wheel::getLength() {
-	return length;
-}

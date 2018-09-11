@@ -195,16 +195,6 @@ void Car::update(double dt) {
 
 	while (rotation > 360) rotation -= 360;
 	while (rotation < 0) rotation += 360;
-
-	
-	//update wheels rolling
-	if (angle > 2 * PI) {
-		angle = 0;
-	}
-	if (angle < -2 * PI) {
-		angle = 0;
-	}
-	angle = angle + (speed) * dt;
 	
 	if (fabs(speed) < .1)
 		speed = 0;
@@ -212,10 +202,6 @@ void Car::update(double dt) {
 		steering = 0;
 
 }
-
-double Car::getAngle() {
-	return angle;
-};
 
 void Car::draw() {
 
@@ -242,7 +228,7 @@ void Car::draw() {
 			//make it rotate
 			if (wheelPtr->Rolling()) {
 				glPushMatrix();
-
+				wheelPtr->setRoll(speed * 2);
 				shapes[i]->draw();
 
 				glPopMatrix();
@@ -256,27 +242,6 @@ void Car::draw() {
 		glPopMatrix();
 
 	}
-
-
-	
-	// Bec - was trying to make the wheel rotate in draw with little success
-	//Wheel *wheelPtr = NULL;
-	//for (vector<Shape*>::iterator it = shapes.begin(); it != shapes.end(); it++) {
-	//	glPushMatrix();
-	//	positionInGl();
-	//	wheelPtr = dynamic_cast<Wheel*> (*it);
-	//	if (wheelPtr->Steering()) {
-	//		wheelPtr->setSteer(-steering); // is this the right variable
-	//	}
-	//	else {
-	//		wheelPtr->setSteer(0);
-	//	}
-	//	if (wheelPtr->Rolling()) {
-	//		wheelPtr->setRoll(//soeed*5)
-	//	}
-	//	(*it)->draw();
-	//	glPopMatrix();
-	//}
 
 };
 
@@ -316,7 +281,7 @@ void Car::shapeInitToShapes() {
 			//check if cylinder is a wheel
 			if (vm.shapes[it].params.cyl.isRolling == true) {
 
-				Wheel* wheel = new Wheel(vm.shapes[it].params.cyl.radius, vm.shapes[it].params.cyl.radius * WHEEL_RADIUS_RATIO, vm.shapes[it].params.cyl.depth, vs.speed, vm.shapes[it].params.cyl.isSteering, vm.shapes[it].params.cyl.isRolling, getAngle());
+				Wheel* wheel = new Wheel(vm.shapes[it].params.cyl.radius, vm.shapes[it].params.cyl.radius * WHEEL_RADIUS_RATIO, vm.shapes[it].params.cyl.depth, vs.speed, vm.shapes[it].params.cyl.isSteering, vm.shapes[it].params.cyl.isRolling);
 				wheel->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
 				wheel->setRotation(vm.shapes[it].rotation);
 				wheel->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);

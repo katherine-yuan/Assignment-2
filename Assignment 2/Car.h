@@ -21,9 +21,7 @@ public:
 
 	void update(double dt);
 
-	double getAngle();
-
-	void draw();
+	void draw();  
 
 
 protected:
@@ -31,8 +29,6 @@ protected:
 	VehicleState vs;
 	void shapeInitToShapes();
 	double wheelRotation;
-
-	double angle;	
 };
 
 #endif // for MTRN2500_CAR_H
