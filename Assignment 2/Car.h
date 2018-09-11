@@ -10,6 +10,8 @@ class Car : public Vehicle {
 
 public:
 
+	friend class Wheel;
+
 	Car();	//default constructor
 	Car(VehicleModel vm_);
 	~Car();	//destructor
@@ -19,7 +21,10 @@ public:
 
 	void update(double dt);
 
+	double getAngle();
+
 	void draw();
+
 
 protected:
 	VehicleModel vm;
@@ -27,6 +32,7 @@ protected:
 	void shapeInitToShapes();
 	double wheelRotation;
 
+	double angle;	
 };
 
 #endif // for MTRN2500_CAR_H

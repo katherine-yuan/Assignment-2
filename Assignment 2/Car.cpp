@@ -198,21 +198,25 @@ void Car::update(double dt) {
 
 	
 	//update wheels rolling
-	if (wheelRotation > 2 * PI) {
-		wheelRotation = 0;
+	if (angle > 2 * PI) {
+		angle = 0;
 	}
-	if (wheelRotation < -2 * PI) {
-		wheelRotation = 0;
+	if (angle < -2 * PI) {
+		angle = 0;
 	}
-	wheelRotation = wheelRotation + speed * dt;
+	angle = angle + speed * dt;
+	
 
 	if (fabs(speed) < .1)
 		speed = 0;
 	if (fabs(steering) < .1)
 		steering = 0;
 
-};
+}
 
+double Car::getAngle() {
+	return angle;
+};
 
 void Car::draw() {
 
@@ -225,20 +229,31 @@ void Car::draw() {
 		
 		Wheel *wheelPtr = NULL;
 		wheelPtr = dynamic_cast<Wheel*>(shapes[i]);
+
+		//check if shape is a wheel
 		if (wheelPtr != NULL) {
+
+			//check if wheel should be steering
 			if (wheelPtr->Steering()) {
 				glPushMatrix();
 				shapes[i]->setRotation(steering);
-				shapes[i]->draw();
 				glPopMatrix();
-			} else {
-				shapes[i]->draw();
 			}
+
+			//make it rotate
+			if (wheelPtr->Rolling()) {
+				glPushMatrix();
+
+				shapes[i]->draw();
+
+				glPopMatrix();
+			}
+
+
 		} else {
 			shapes[i]->draw();
 		}
-		
-		//shapes[i]->draw();
+
 		glPopMatrix();
 
 	}
@@ -302,7 +317,7 @@ void Car::shapeInitToShapes() {
 			//check if cylinder is a wheel
 			if (vm.shapes[it].params.cyl.isRolling == true) {
 
-				Wheel* wheel = new Wheel(vm.shapes[it].params.cyl.radius, vm.shapes[it].params.cyl.radius * WHEEL_RADIUS_RATIO, vm.shapes[it].params.cyl.depth, 0/*wheel speed*/, vm.shapes[it].params.cyl.isSteering, vm.shapes[it].params.cyl.isRolling);
+				Wheel* wheel = new Wheel(vm.shapes[it].params.cyl.radius, vm.shapes[it].params.cyl.radius * WHEEL_RADIUS_RATIO, vm.shapes[it].params.cyl.depth, vs.speed, vm.shapes[it].params.cyl.isSteering, vm.shapes[it].params.cyl.isRolling, getAngle());
 				wheel->setPosition(vm.shapes[it].xyz[0], vm.shapes[it].xyz[1], vm.shapes[it].xyz[2]);
 				wheel->setRotation(vm.shapes[it].rotation);
 				wheel->setColor(vm.shapes[it].rgb[0], vm.shapes[it].rgb[1], vm.shapes[it].rgb[2]);

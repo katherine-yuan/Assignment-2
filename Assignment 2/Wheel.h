@@ -7,9 +7,11 @@ class Wheel : public Cylinder {
 
 public:
 
+	friend class Car;
+
 	Wheel(); //default constructor
 	Wheel(double radius_, double innerRadius_, double length_);
-	Wheel(double radius_, double innerRadius_, double length_, double wheelSpeed_, bool isSteering_, bool isRolling_);
+	Wheel(double radius_, double innerRadius_, double length_, double wheelSpeed_, bool isSteering_, bool isRolling_, double angle);
 	Wheel(double x_, double y_, double z_, double rotation_, double radius_, double innerRadius_, double length_);
 	~Wheel(); // default destructor 
 
@@ -35,6 +37,8 @@ protected:
 	double rollingRate;
 	bool isSteering;
 	bool isRolling;
+
+	double angle;
 };
 
 #endif // for MTRN2500_WHEEL_H

@@ -58,7 +58,7 @@ Wheel::Wheel(double x_, double y_, double z_, double rotation_, double radius_, 
 	red = blue = green = 1.0;
 }
 
-Wheel::Wheel(double radius_, double innerRadius_, double length_, double wheelSpeed_, bool isSteering_, bool isRolling_) {
+Wheel::Wheel(double radius_, double innerRadius_, double length_, double wheelSpeed_, bool isSteering_, bool isRolling_, double angle_) {
 	radius = radius_;
 	innerRadius = innerRadius_;
 	length = length_;
@@ -66,6 +66,7 @@ Wheel::Wheel(double radius_, double innerRadius_, double length_, double wheelSp
 	wheelSpeed = wheelSpeed_;
 	isSteering = isSteering_;
 	isRolling = isRolling_;
+	angle = angle_;
 }
 
 Wheel::~Wheel() {}
@@ -185,6 +186,7 @@ void Wheel::draw() {
 
 	// Spokes
 	double spokeRadius = radius / 10;
+	
 	//ensures that the spoke width is not wider than the width of the wheel rim
 	if (spokeRadius > length / 2) {
 		spokeRadius = length / 2;
@@ -192,6 +194,7 @@ void Wheel::draw() {
 	glPushMatrix();
 	glTranslated(0, 0, length / 2);				//move to the centre of the wheel
 	glRotated(90, 0, 1, 0);						//rotate about y-axis to move z-axis to original x-axis direction
+	glRotated(angle, 1, 0, 0);
 												//note that x-axis is now pointing out of the screen
 	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
 
