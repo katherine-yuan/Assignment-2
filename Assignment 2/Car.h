@@ -17,7 +17,7 @@ public:
 	VehicleModel getVehicleModel();
 	VehicleState getVehicleState();
 
-//	void update(double dt);
+	void update(double dt);
 
 	void draw();
 
@@ -25,6 +25,7 @@ protected:
 	VehicleModel vm;
 	VehicleState vs;
 	void shapeInitToShapes();
+	double wheelRotation;
 
 };
 

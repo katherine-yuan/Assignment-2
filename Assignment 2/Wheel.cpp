@@ -87,8 +87,9 @@ void Wheel::draw() {
 	/*
 	// Adjust to centre of base - should this be before or after
 	glTranslated(0, radius, -length / 2);
+	*/
 
-
+	/*
 	// Rotate axis accordingly
 	if (isSteering) {
 	glRotatef(steeringAngle, 0, 1, 0);
@@ -98,8 +99,9 @@ void Wheel::draw() {
 	glRotatef(-wheelSpeed, 0, 0, 1);
 	glTranslatef(0, -radius, 0);
 	}
+	*/
 
-
+	/*
 	// Wheel rim
 	glPushMatrix();
 	// Create new cylinder object
@@ -181,7 +183,7 @@ void Wheel::draw() {
 
 	glPopMatrix(); //at this point drawing origin is at the centre of the base of the wheel (where it touches the ground)
 
-				   // Spokes
+	// Spokes
 	double spokeRadius = radius / 10;
 	//ensures that the spoke width is not wider than the width of the wheel rim
 	if (spokeRadius > length / 2) {
@@ -198,6 +200,7 @@ void Wheel::draw() {
 	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
 	glPopMatrix();
 
+	
 	glPushMatrix();
 	glRotated(60, 1, 0, 0);						//rotate about x-axis to turn z-axis 60 degrees counter clockwise
 	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
@@ -211,7 +214,7 @@ void Wheel::draw() {
 	glRotated(180, 0, 1, 0);
 	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
 	glPopMatrix();
-
+	
 	glPopMatrix();
 
 	glPopMatrix();
