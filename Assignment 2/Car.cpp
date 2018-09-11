@@ -204,9 +204,8 @@ void Car::update(double dt) {
 	if (angle < -2 * PI) {
 		angle = 0;
 	}
-	angle = angle + speed * dt;
+	angle = angle + (speed) * dt;
 	
-
 	if (fabs(speed) < .1)
 		speed = 0;
 	if (fabs(steering) < .1)

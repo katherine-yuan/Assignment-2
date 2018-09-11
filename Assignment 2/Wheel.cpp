@@ -194,6 +194,8 @@ void Wheel::draw() {
 	glPushMatrix();
 	glTranslated(0, 0, length / 2);				//move to the centre of the wheel
 	glRotated(90, 0, 1, 0);						//rotate about y-axis to move z-axis to original x-axis direction
+	
+	//rotate wheel about x
 	glRotated(angle, 1, 0, 0);
 												//note that x-axis is now pointing out of the screen
 	gluCylinder(gluNewQuadric(), spokeRadius, spokeRadius, radius, SLICES, STACKS);
