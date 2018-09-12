@@ -45,8 +45,6 @@
 #include "Cylinder.h"
 #include "Wheel.h"
 
-#include "MyVehicle.h"
-#include "ModelVehicle.h"
 #include "Car.h"
 
 #include "XBoxController.h"
