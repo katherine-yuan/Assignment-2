@@ -23,12 +23,27 @@ public:
 
 	void draw();  
 
+	//// functions for setting 
+	//void setPrevX(double prevX_);
+	//void setPrevY(double prevY_);
+	//void setPrevRotation(double prevRotation_);
+	//void setPrevSteer(double prevSteer_);
+	//void setPrevSpeed(double prevSpeed_);
+
 
 protected:
 	VehicleModel vm;
 	VehicleState vs;
 	void shapeInitToShapes();
 	double wheelRotation;
+
+	//// variables for follow mode
+	//double prevX;
+	//double prevY;
+	//double prevRotation;
+	//double prevSteer;
+	//double prevSpeed;
+
 };
 
 #endif // for MTRN2500_CAR_H

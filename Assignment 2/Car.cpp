@@ -243,7 +243,27 @@ void Car::draw() {
 
 	}
 
-};
+}
+
+//void Car::setPrevX(double prevX_) {
+//	prevX = prevX_;
+//};
+//
+//void Car::setPrevY(double prevY_) {
+//	prevY = prevY_;
+//};
+//
+//void Car::setPrevRotation(double prevRotation_) {
+//	prevRotation = prevRotation_;
+//};
+//
+//void Car::setPrevSteer(double prevSteer_) {
+//	prevSteer = prevSteer_;
+//};
+//
+//void Car::setPrevSpeed(double prevSpeed_) {
+//	prevSpeed = prevSpeed_;
+//};
 
 void Car::shapeInitToShapes() {
 	//this function converts ShapesInit vector into a Shapes vector so that the vehicle can be drawn

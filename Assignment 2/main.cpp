@@ -195,6 +195,7 @@ void display() {
 		
 	// draw my vehicle
 	if (vehicle != NULL) {
+
 		vehicle->draw();
 
 	}
@@ -260,10 +261,11 @@ void idle() {
 	steering = 0;
 
 	if (KeyManager::get()->isAsciiKeyPressed('l')) {
+
 		//code for chasing the vehicle
-		vehicle->setRotation(otherVehicles[1]->getRotation());
 		vehicle->setX(otherVehicles[1]->getX());
 		vehicle->setZ(otherVehicles[1]->getZ());
+		vehicle->setRotation(otherVehicles[1]->getRotation());
 		steering = otherVehicles[1]->getSteering();
 		speed = otherVehicles[1]->getSpeed();
 
