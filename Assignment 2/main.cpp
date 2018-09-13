@@ -5,6 +5,7 @@
 #include <cstring>
 #include <sstream>
 #include <map>
+#include <conio.h>
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -191,7 +192,7 @@ void display() {
 	// draw other vehicles
 	for (std::map<int, Vehicle *>::iterator iter = otherVehicles.begin(); iter != otherVehicles.end(); ++iter)
 		iter->second->draw();
-
+		
 	// draw my vehicle
 	if (vehicle != NULL) {
 		vehicle->draw();
@@ -251,7 +252,6 @@ double getTime()
 }
 
 void idle() {
-	// Add xBox stuff here?
 
 	XInputWrapper xinput{};
 	int newController = 0;
@@ -261,6 +261,11 @@ void idle() {
 
 	if (KeyManager::get()->isAsciiKeyPressed('l')) {
 		//code for chasing the vehicle
+		vehicle->setRotation(otherVehicles[1]->getRotation());
+		vehicle->setX(otherVehicles[1]->getX());
+		vehicle->setZ(otherVehicles[1]->getZ());
+		steering = otherVehicles[1]->getSteering();
+		speed = otherVehicles[1]->getSpeed();
 
 	} else {
 		GamePad::XBoxController currentController(&xinput, 0);
@@ -520,10 +525,8 @@ void keydown(unsigned char key, int x, int y) {
 		Camera::get()->togglePursuitMode();
 		break;
 	case 'l':
-		steering = otherVehicles[1]->getSteering();
-		speed = otherVehicles[1]->getSpeed();
 		//make it following code
-		//Camera::get()->togglePursuitMode();
+		Camera::get()->togglePursuitMode();
 		break;
 	}
 
