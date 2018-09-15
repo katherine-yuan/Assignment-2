@@ -27,10 +27,10 @@ TriPrism::TriPrism() {
 	theta = 0;
 
 	// Variables that assist with the draw function
-	double aLengthHalf = 0;
-	double depthHalf   = 0;
-	double topLeftCornerX = 0;
-	double topLeftCornerY = 0;
+	aLengthHalf = 0;
+	depthHalf   = 0;
+	topLeftCornerX = 0;
+	topLeftCornerY = 0;
 }
 
 TriPrism::TriPrism(double aLength_, double bLength_, double depth_, double theta_) {
@@ -40,10 +40,10 @@ TriPrism::TriPrism(double aLength_, double bLength_, double depth_, double theta
 	theta = theta_;
 
 	// Variables that assist with the draw function
-	double aLengthHalf = aLength / 2;
-	double depthHalf = depth / 2;
-	double topLeftCornerX = aLengthHalf - bLength * cos(theta);
-	double topLeftCornerY = bLength * sin(theta);
+	aLengthHalf = aLength / 2;
+	depthHalf = depth / 2;
+	topLeftCornerX = aLengthHalf - bLength * cos(theta);
+	topLeftCornerY = bLength * sin(theta);
 };
 
 TriPrism::~TriPrism() {
