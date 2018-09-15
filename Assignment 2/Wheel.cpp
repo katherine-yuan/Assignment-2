@@ -33,6 +33,7 @@ Wheel::Wheel() {
 	radius = 0;
 	innerRadius = 0.0;
 	length = 0;
+	spokeRadius = 0;
 
 	wheelSpeed = 0;
 	isSteering = 0;
@@ -45,6 +46,7 @@ Wheel::Wheel(double radius_, double innerRadius_, double length_,
 	radius = radius_;
 	innerRadius = innerRadius_;
 	length = length_;
+	spokeRadius = radius / 10;
 
 	wheelSpeed = wheelSpeed_;
 	isSteering = isSteering_;
@@ -89,7 +91,7 @@ void Wheel::draw() {
 
 
 	// Drawing the Spokes
-	double spokeRadius = radius / 10;
+
 	// Ensuring that the spoke width is not wider than the width of the 
 	// wheel rim.
 	if (spokeRadius > length / 2) {
