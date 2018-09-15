@@ -1,17 +1,16 @@
+// Katherine Yuan z5161528 2018/08/29
+
 #ifndef MTRN2500_TRIPRISM_H
 #define MTRN2500_TRIPRISM_H
-
-// Katherine Yuan z5161528 2018/08/29
 
 #include "Shape.hpp"
 
 class TriPrism : public Shape {
 
 public:
-	TriPrism();		//default constructor
+	TriPrism();		// Default constructor
 	TriPrism(double aLength_, double bLength_, double depth_, double theta_);
-	TriPrism(double x_, double y_, double z_, double rotation_, double aLength_, double bLength_, double depth_, double theta_);
-	~TriPrism();	//destructor
+	~TriPrism();	// Destructor
 
 	//Getter functions
 	double getALength();
@@ -29,8 +28,15 @@ public:
 	void draw();
 
 protected:
-	double aLength, bLength, depth, theta;
-	//theta is in radians
+	double aLength;
+	double bLength;
+	double depth;
+	double theta;
+
+	double aLengthHalf;
+	double depthHalf;
+	double topLeftCornerX;
+	double topLeftCornerY;
 };
 
 #endif // for MTRN2500_TRIPRISM_H
