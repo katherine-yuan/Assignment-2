@@ -8,10 +8,9 @@
 class TrapPrism : public Shape {
 
 public:
-	TrapPrism();	//default constructor
+	TrapPrism();	// Default constructor
 	TrapPrism(double aLength_, double bLength_, double depth_, double height_, double offset_);
-	TrapPrism(double x_, double y_, double z_, double rotation_, double aLength_, double bLength_, double depth_, double height_, double offset_);
-	~TrapPrism();	//destructor
+	~TrapPrism();	// Destructor
 
 	//Getter functions
 	double getALength();
@@ -31,7 +30,16 @@ public:
 	void draw();
 
 protected:
-	double aLength, bLength, depth, height, offset;
+	double aLength; 
+	double bLength;
+	double depth;
+	double height;
+	double offset;
+
+	double aLengthHalf;
+	double depthHalf;
+	double topLeftCornerX;
+	double topRightCornerX;
 };
 
 #endif // for MTRN2500_TRAPPRISM_H
