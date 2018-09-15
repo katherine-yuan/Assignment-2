@@ -12,10 +12,9 @@
 class Cylinder : public Shape {
 
 public:
-	Cylinder(); //default constructor
+	Cylinder(); // Default constructor
 	Cylinder(double radius_, double innerRadius_, double length_);
-	Cylinder(double x_, double y_, double z_, double rotation_, double radius_, double innerRadius_, double length_);
-	~Cylinder(); // default destructor 
+	~Cylinder(); // Default destructor 
 
 	// Getter Functions
 	double getLength();
@@ -31,7 +30,9 @@ public:
 	void draw();
 
 protected:
-	double radius, innerRadius, length;
+	double radius;
+	double innerRadius;
+	double length;
 };
 
 #endif // for MTRN2500_CYLINDER_H
