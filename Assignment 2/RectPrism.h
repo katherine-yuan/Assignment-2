@@ -8,10 +8,9 @@
 class RectPrism : public Shape {
 
 public:
-	RectPrism(); //default constructor
+	RectPrism(); // Default constructor
 	RectPrism(double length_, double depth_, double height_);
-	RectPrism(double x_, double y_, double z_,  double rotation_, double length_, double depth_, double height_);
-	~RectPrism(); // default destructor 
+	~RectPrism(); // Default destructor 
 
 	// Getter Functions
 	double getLength();
@@ -27,7 +26,12 @@ public:
 	void draw();
 
 protected:
-	double length, depth, height;
+	double length;
+	double depth;
+	double height;
+	double halfLength;
+	double halfDepth;
+	double base;
 };
 
 #endif // for MTRN2500_RECTPRISM_H
