@@ -20,86 +20,72 @@
 
 RectPrism::RectPrism() {
 	// Default constructor for this shape
-	length = depth = height = 0;
-	x = y = z = 0.0;
-	rotation = 0.0;
-	red = green = blue = 1.0;
+	length = 0;
+	height = 0;
+	depth = 0;
+
+	// Variables used for drawing the rectangles
+	halfLength = 0;
+	halfDepth = 0;
+	base = 0;
 }
 
 RectPrism::RectPrism(double length_, double height_, double depth_) {
+	// Variables dictating the dimensions of the rectangles
 	length = length_;
-	depth = depth_;
 	height = height_;
-
-	x = y = z = 0.0;
-	rotation = 0.0;
-	red = green = blue = 1.0;		//set default colour to white
-}
-
-RectPrism::RectPrism(double x_, double y_, double z_, double rotation_, double length_, double depth_, double height_) {
-	x = x_;
-	y = y_;
-	z = z_;
-	rotation = rotation_;
-
-	length = length_;
 	depth = depth_;
-	height = height_;
 
-	red = blue = green = 1.0;	//set default colour to white
+	// Variables used for drawing the rectangles
+	halfLength = length / 2;
+	halfDepth  = depth / 2;
+	base = 0;
 }
 
 RectPrism::~RectPrism() {}
 
 void RectPrism::draw() {
-
-	double halfLength = length / 2;
-	double halfDepth = depth / 2; 
-	double base = 0;
-
 	// Set position
 	glPushMatrix();
 	positionInGL();
-
-	//trying to draw a rectangle
-	glBegin(GL_QUADS);
-
 	setColorInGL();
 
-	// base 
-	glVertex3f(halfLength, base, -halfDepth ); //Bottom front left corner
-	glVertex3f(halfLength , base, halfDepth); //Bottom back left corner
-	glVertex3f(-halfLength, base, halfDepth); //Bottom back right corner
-	glVertex3f(-halfLength, base, -halfDepth); //Bottom front right corner
+	glBegin(GL_QUADS);
 
-	// top 
-	glVertex3f(halfLength, height, -halfDepth ); //Top front left corner
-	glVertex3f(halfLength, height, halfDepth ); //Top back left corner
-	glVertex3f(-halfLength, height, halfDepth ); //Top back right corner
+	// Rectagular prism bottom face 
+	glVertex3f( halfLength, base, -halfDepth ); //Bottom front left corner
+	glVertex3f( halfLength , base, halfDepth);  //Bottom back left corner
+	glVertex3f(-halfLength, base, halfDepth);   //Bottom back right corner
+	glVertex3f(-halfLength, base, -halfDepth);  //Bottom front right corner
+
+	// Rectagular prism top face 
+	glVertex3f( halfLength, height, -halfDepth ); //Top front left corner
+	glVertex3f( halfLength, height, halfDepth );  //Top back left corner
+	glVertex3f(-halfLength, height, halfDepth );  //Top back right corner
 	glVertex3f(-halfLength, height, -halfDepth ); //Top front right corner
 
-	//front
-	glVertex3f(halfLength, base, -halfDepth); //Bottom front left corner
-	glVertex3f(halfLength, height, -halfDepth); //Top front left corner
+	// Rectagular prism front face 
+	glVertex3f( halfLength, base, -halfDepth);   //Bottom front left corner
+	glVertex3f( halfLength, height, -halfDepth); //Top front left corner
 	glVertex3f(-halfLength, height, -halfDepth); //Top front right corner
-	glVertex3f(-halfLength, base, -halfDepth); //Bottom front right corner
+	glVertex3f(-halfLength, base, -halfDepth);   //Bottom front right corner
 
-	//back
-	glVertex3f(halfLength, base, halfDepth); //Bottom back left corner
-	glVertex3f(halfLength, height, halfDepth); //Top back left corner
+	// Rectagular prism back face 
+	glVertex3f( halfLength, base, halfDepth);    //Bottom back left corner
+	glVertex3f( halfLength, height, halfDepth);  //Top back left corner
 	glVertex3f(-halfLength, height, halfDepth ); //Top back right corner
-	glVertex3f(-halfLength, base, halfDepth ); //Bottom back right corner
+	glVertex3f(-halfLength, base, halfDepth );   //Bottom back right corner
 
-	//left side
-	glVertex3f(halfLength, base, -halfDepth); //Bottom front left corner
-	glVertex3f(halfLength, base, halfDepth); //Bottom back left corner
-	glVertex3f(halfLength, height, halfDepth); //Top back left corner
+	// Rectagular prism left face 
+	glVertex3f(halfLength, base, -halfDepth);    //Bottom front left corner
+	glVertex3f(halfLength, base, halfDepth);     //Bottom back left corner
+	glVertex3f(halfLength, height, halfDepth);   //Top back left corner
 	glVertex3f(halfLength, height, -halfDepth ); //Top front left corner
 
-	//right side
-	glVertex3f(-halfLength, base, -halfDepth ); //Bottom front right corner
-	glVertex3f(-halfLength, base, halfDepth); //Bottom back right corner
-	glVertex3f(-halfLength, height, halfDepth); //Top back right corner
+	// Rectagular prism right face 
+	glVertex3f(-halfLength, base, -halfDepth );  //Bottom front right corner
+	glVertex3f(-halfLength, base, halfDepth);    //Bottom back right corner
+	glVertex3f(-halfLength, height, halfDepth);  //Top back right corner
 	glVertex3f(-halfLength, height, -halfDepth); //Top front right corner
 
 	glEnd();

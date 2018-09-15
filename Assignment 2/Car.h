@@ -1,3 +1,7 @@
+// MTRN2500 Semester 2 2018
+// Katherine and Rebecca 
+// z5161528  and z5115440
+
 #ifndef MTRN2500_CAR_H
 #define MTRN2500_CAR_H
 
@@ -12,17 +16,16 @@ public:
 
 	friend class Wheel;
 
-	Car();	//default constructor
+	Car();	// Default constructor
 	Car(VehicleModel vm_);
-	~Car();	//destructor
+	~Car();	// Destructor
 
 	VehicleModel getVehicleModel();
 	VehicleState getVehicleState();
 
 	void update(double dt);
 
-	void draw();  
-
+	void draw();
 
 protected:
 	VehicleModel vm;

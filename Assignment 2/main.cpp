@@ -1,3 +1,10 @@
+// MTRN2500 Semester 2 2018
+// Katherine and Rebecca 
+// z5161528  and z5115440
+
+// Style notes: Comments above the line they refer to. All lines less than 80
+// characters to allow for double screen use. Comments begin with a capital 
+// and a space is always left between the "//" and the start of the line.
 
 #include <iostream>
 #include <cstdlib>
@@ -188,25 +195,24 @@ void display() {
 
 	Ground::draw();
 
-	// draw other vehicles
-	for (std::map<int, Vehicle *>::iterator iter = otherVehicles.begin(); iter != otherVehicles.end(); ++iter)
+// Draw other vehicles from the server
+	for (std::map<int, Vehicle *>::iterator iter = otherVehicles.begin();
+						iter != otherVehicles.end(); ++iter)
 		iter->second->draw();
 
-	// draw my vehicle
+	// Draw my vehicle
 	if (vehicle != NULL) {
 		vehicle->draw();
-
 	}
 
-	// draw obstacles
+	// Draw obstacles
 	ObstacleManager::get()->drawAll();
 
-	// draw goals
+	// Draw goals
 	drawGoals();
 
 	// draw HUD
 	HUD::Draw();
-
 
 	glutSwapBuffers();
 };
@@ -251,22 +257,24 @@ double getTime()
 }
 
 void idle() {
-	// Add xBox stuff here?
-
+		// Initiate a new instance of an xbox controller
 	XInputWrapper xinput{};
 	int newController = 0;
 
-	speed = 0;
+	speed    = 0;
 	steering = 0;
 
 	if (KeyManager::get()->isAsciiKeyPressed('l')) {
-		//code for chasing the vehicle
-
-	} else {
+		// Insert code for chasing the vehicle
+	}
+	else {
 		GamePad::XBoxController currentController(&xinput, 0);
-		
+
+		// Check whether the xbox controller is conencted
 		if (currentController.IsConnected()) {
-			// Controlling the camera
+			// If its connected all controls should be through it
+
+			// Control the camera with the Xbox
 			if (currentController.PressedX()) {
 				Camera::get()->strafeLeft();
 			}
@@ -286,7 +294,6 @@ void idle() {
 				Camera::get()->strafeUp();
 			}
 
-
 			// Controlling the vehicle 
 			if (currentController.PressedDownDpad()) {
 				speed = Vehicle::MAX_BACKWARD_SPEED_MPS;
@@ -302,8 +309,8 @@ void idle() {
 			}
 		}
 		else {
-
-			// In same order as above
+			// If the controller is not connected operate through keyboard.
+			// Functions are in the same order as above.
 			if (KeyManager::get()->isAsciiKeyPressed('a')) {
 				Camera::get()->strafeLeft();
 			}

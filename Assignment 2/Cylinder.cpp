@@ -21,40 +21,20 @@
 Cylinder::Cylinder() {
 	// Default constructor for this shape
 	innerRadius = 0.0;
-	radius = 5;
-	length = 10;
-	x = y = z = 0.0;
-	rotation = 0.0;
-	red = green = blue = 1.0;
+	radius = 0;
+	length = 0;
 }
 
 Cylinder::Cylinder(double radius_, double innerRadius_, double length_) {
 	radius = radius_;
 	innerRadius = innerRadius_;
 	length = length_;
-
-	x = y = z = 0.0;
-	rotation = 0.0;
-	red = green = blue = 1.0;
-}
-
-Cylinder::Cylinder(double x_, double y_, double z_, double rotation_, double radius_, double innerRadius_, double length_) {
-	x = x_;
-	y = y_;
-	z = z_;
-	rotation = rotation_;
-
-	radius = radius_;
-	innerRadius = innerRadius_;
-	length = length_;
-
-	red = blue = green = 1.0;
 }
 
 Cylinder::~Cylinder() {}
 
 void Cylinder::draw() {
-	
+
 	// Set position
 	glPushMatrix();
 	positionInGL();
@@ -62,19 +42,16 @@ void Cylinder::draw() {
 
 	// Create new cylinder object
 	GLUquadricObj *cylinder = gluNewQuadric();
-
 	// Adjust centre to server shape specifications given
-	glTranslatef(0, radius, - length / 2);
-
+	glTranslatef(0, radius, -length / 2);
 	// Draw hollow cylinder body
 	gluCylinder(cylinder, radius, radius, length, SLICES, STACKS);
-
 	// Draw caps using gluDisk
 	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS);
+	// Moves to draw the back disk
+	glTranslated(0, 0, length); 
+	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS); 
 
-	glTranslated(0, 0, length); //moves to draw the back disk
-	gluDisk(cylinder, innerRadius, radius, SLICES, STACKS); //changed numbers to #defined versions here
-	
 	glPopMatrix();
 }
 

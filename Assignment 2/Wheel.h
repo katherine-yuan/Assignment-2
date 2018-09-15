@@ -1,3 +1,7 @@
+// MTRN2500 Semester 2 2018
+// Katherine and Rebecca 
+// z5161528  and z5115440
+
 #ifndef MTRN2500_WHEEL_H
 #define MTRN2500_WHEEL_H
 
@@ -9,17 +13,16 @@ public:
 
 	friend class Car;
 
-	Wheel(); //default constructor
-	Wheel(double radius_, double innerRadius_, double length_);
+	// Default constructor
+	Wheel(); 
 	Wheel(double radius_, double innerRadius_, double length_, double wheelSpeed_, bool isSteering_, bool isRolling_);
-	Wheel(double x_, double y_, double z_, double rotation_, double radius_, double innerRadius_, double length_);
-	~Wheel(); // default destructor 
+	// Default destructor 
+	~Wheel(); 
 
 	// Draw Function
 	void draw();
 
 	// Steering and rolling functions
-
 	void setRoll(double roll_);
 	bool Steering();
 	bool Rolling();
@@ -28,11 +31,11 @@ protected:
 	double radius;
 	double innerRadius;
 	double length;
-	double wheelSpeed;
+	double spokeRadius;
 
-	double rollingRate;
-	bool isSteering;
-	bool isRolling;
+	double wheelSpeed;
+	bool   isSteering;
+	bool   isRolling;
 
 };
 
