@@ -73,7 +73,7 @@ void Wheel::draw() {
 	// Adjust to centre of the base of the wheel 
 	glTranslated(0, radius, -length / 2);
 
-	// Drawing the Wheel Rim
+	// DRAWING THE WHEEL RIM
 	glPushMatrix();
 	// Create the new Wheel Rim object
 	GLUquadricObj *wheelRim = gluNewQuadric();
@@ -89,9 +89,7 @@ void Wheel::draw() {
 	// At this point drawing origin is at the centre of the base of the 
 	// wheel (where it touches the ground).
 
-
-	// Drawing the Spokes
-
+	// DRAWING THE SPOKES
 	// Ensuring that the spoke width is not wider than the width of the 
 	// wheel rim.
 	if (spokeRadius > length / 2) {
