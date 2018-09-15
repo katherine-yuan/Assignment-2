@@ -265,7 +265,12 @@ void idle() {
 	steering = 0;
 
 	if (KeyManager::get()->isAsciiKeyPressed('l')) {
-		// Insert code for chasing the vehicle
+		//code for chasing the vehicle
+		vehicle->setX(otherVehicles[1]->getX());
+		vehicle->setZ(otherVehicles[1]->getZ());
+		vehicle->setRotation(otherVehicles[1]->getRotation());
+		steering = otherVehicles[1]->getSteering();
+		speed = otherVehicles[1]->getSpeed();
 	}
 	else {
 		GamePad::XBoxController currentController(&xinput, 0);
