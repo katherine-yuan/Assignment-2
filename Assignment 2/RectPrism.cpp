@@ -92,6 +92,7 @@ void RectPrism::draw() {
 
 	glPopMatrix();
 }
+
 // Getters
 double RectPrism::getLength() {
 	return length;
@@ -102,6 +103,7 @@ double RectPrism::getDepth() {
 double RectPrism::getHeight() {
 	return height;
 }
+
 // Setters
 void RectPrism::setLength(double length_) {
 	length = length_;

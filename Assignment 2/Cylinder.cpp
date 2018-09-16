@@ -65,6 +65,7 @@ double Cylinder::getRadius() {
 double Cylinder::getInRadius() {
 	return innerRadius;
 }
+
 // Setters
 void Cylinder::setLength(double length_) {
 	length = length_;
