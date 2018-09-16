@@ -14,8 +14,6 @@ class Car : public Vehicle {
 
 public:
 
-	friend class Wheel;
-
 	Car();	// Default constructor
 	Car(VehicleModel vm_);
 	~Car();	// Destructor

@@ -7,7 +7,7 @@ Vehicle::Vehicle() {
 
 Vehicle::~Vehicle()
 { 
-	// clean-up added shapes
+	// Clean-up added shapes
 	for(int i = 0; i < shapes.size(); i++) {
 		delete shapes[i];
 	}

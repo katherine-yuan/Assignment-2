@@ -74,23 +74,23 @@ using namespace std;
 using namespace scos;
 
 // Used to store the previous mouse location so we
-//   can calculate relative mouse movement.
+// can calculate relative mouse movement.
 int prev_mouse_x = -1;
 int prev_mouse_y = -1;
 
-// vehicle control related variables
+// Vehicle control related variables
 Vehicle * vehicle = NULL;
 double speed = 0;
 double steering = 0;
 
-// default goal location
+// Default goal location
 std::deque<GoalState> goals;
 
 std::map<int, Vehicle *> otherVehicles;
 
 int frameCounter = 0;
 
-//int _tmain(int argc, _TCHAR* argv[]) {
+// int _tmain(int argc, _TCHAR* argv[]) {
 int main(int argc, char ** argv) {
 
 	const int WINDOW_WIDTH = 800;
@@ -121,20 +121,20 @@ int main(int argc, char ** argv) {
 
 	// -------------------------------------------------------------------------
 	// Please uncomment the following line of code and replace 'MyVehicle'
-	//   with the name of the class you want to show as the current 
-	//   custom vehicle.
+	// with the name of the class you want to show as the current 
+	// custom vehicle.
 	// -------------------------------------------------------------------------
 
 	vehicle = new Car();
 
 
-	// add test obstacles
+	// Add test obstacles
 	ObstacleManager::get()->addObstacle(Obstacle(10, 10, 1));
 	ObstacleManager::get()->addObstacle(Obstacle(10, -10, 1));
 	ObstacleManager::get()->addObstacle(Obstacle(-10, 10, 1));
 	ObstacleManager::get()->addObstacle(Obstacle(-10, -10, 1));
 
-	// add test goal
+	// Add test goal
 	GoalState g;
 	g.x = 25;
 	g.z = 0;
@@ -160,7 +160,7 @@ void drawGoals()
 		glRotated(90, -1, 0, 0);
 		static GLUquadric * quad = gluNewQuadric();
 
-		// make first goal purple
+		// Make first goal purple
 		if (i == 0)
 			glColor3f(1, .3, 1);
 		else
@@ -211,7 +211,7 @@ void display() {
 	// Draw goals
 	drawGoals();
 
-	// draw HUD
+	// Draw HUD
 	HUD::Draw();
 
 	glutSwapBuffers();
@@ -227,7 +227,7 @@ void reshape(int width, int height) {
 
 void remoteDriver(Vehicle * vehicle, double x, double z, double r, double speed_, double steering_)
 {
-	// filter 
+	// Filter 
 	const double kSmoothingFactor = 0.5;
 	vehicle->setX(vehicle->getX() * kSmoothingFactor + x * (1 - kSmoothingFactor));
 	vehicle->setZ(vehicle->getZ() * kSmoothingFactor + z * (1 - kSmoothingFactor));
@@ -257,7 +257,8 @@ double getTime()
 }
 
 void idle() {
-		// Initiate a new instance of an xbox controller
+	
+	// Initiate a new instance of an xbox controller
 	XInputWrapper xinput{};
 	int newController = 0;
 
@@ -265,7 +266,8 @@ void idle() {
 	steering = 0;
 
 	if (KeyManager::get()->isAsciiKeyPressed('l')) {
-		//code for chasing the vehicle
+		
+		// Code for chasing the vehicle
 		vehicle->setX(otherVehicles[1]->getX());
 		vehicle->setZ(otherVehicles[1]->getZ());
 		vehicle->setRotation(otherVehicles[1]->getRotation());
@@ -275,9 +277,10 @@ void idle() {
 	else {
 		GamePad::XBoxController currentController(&xinput, 0);
 
-		// Check whether the xbox controller is conencted
+		// Checks whether the xbox controller is connected
 		if (currentController.IsConnected()) {
-			// If its connected all controls should be through it
+			// If it's connected, car should be controlled by the xbox
+			// Keyboard commands will not work when xbox is connected
 
 			// Control the camera with the Xbox
 			if (currentController.PressedX()) {
@@ -361,23 +364,23 @@ void idle() {
 
 	}
 
-	// attempt to do data communications every 4 frames if we've created a local vehicle
+	// Attempt to do data communications every 4 frames if we've created a local vehicle
 	if (frameCounter % 4 == 0 && vehicle != NULL) {
 
-		// if not connected, attempt to connect every 2 seconds
+		// If not connected, attempt to connect every 2 seconds
 		if (!RemoteDataManager::IsConnected()) {
 			if (frameCounter % 120 == 0) {
 
-				// erase other vehicles
+				// Erase other vehicles
 				for (std::map<int, Vehicle*>::iterator iter = otherVehicles.begin(); iter != otherVehicles.end(); ++iter) {
 					delete iter->second;
 				}
 				otherVehicles.clear();
 
-				// uncomment this line to connect to the robotics server. - change this
+				// Uncomment this line to connect to the robotics server.
 				RemoteDataManager::Connect("www.robotics.unsw.edu.au", "18081");
 
-				// on connect, let's tell the server what we look like
+				// On connect, let's tell the server what we look like
 				if (RemoteDataManager::IsConnected()) {
 					ObstacleManager::get()->removeAll();
 
@@ -392,7 +395,7 @@ void idle() {
 			}
 		}
 
-		// if we're connected, send our vehicle state to the server
+		// If we're connected, send our vehicle state to the server
 		if (RemoteDataManager::IsConnected()) {
 			VehicleState vs;
 			vs.remoteID = 0;
@@ -404,7 +407,7 @@ void idle() {
 			RemoteDataManager::Write(GetVehicleStateStr(vs));
 		}
 
-		// if we're still connected, receive and handle response messages from the server
+		// If we're still connected, receive and handle response messages from the server
 		if (RemoteDataManager::IsConnected()) {
 			std::vector<RemoteMessage> msgs = RemoteDataManager::Read();
 			for (unsigned int i = 0; i < msgs.size(); i++) {
@@ -413,21 +416,22 @@ void idle() {
 				//cout << msg.payload << endl;
 
 				switch (msg.type) {
-					// new models
+				
+				// New models
 				case 'M':
 				{
 					std::vector<VehicleModel> models = GetVehicleModels(msg.payload);
 					for (unsigned int i = 0; i < models.size(); i++) {
 						VehicleModel vm = models[i];
 
-						// uncomment the line below to create remote vehicles
+						// Uncomment the line below to create remote vehicles
 						otherVehicles[vm.remoteID] = new Car(vm);
 
 					}
 					break;
 				}
 
-				// vehicle states
+				// Vehicle states
 				case 'S':
 				{
 					std::vector<VehicleState> states = GetVehicleStates(msg.payload);
@@ -443,14 +447,14 @@ void idle() {
 					break;
 				}
 
-				// goal state
+				// Goal state
 				case 'G':
 				{
 					goals = GetGoals(msg.payload);
 					break;
 				}
 
-				// obstacle state
+				// Obstacle state
 				case 'O':
 				{
 					std::vector<ObstacleState> obs = GetObstacles(msg.payload);
@@ -461,7 +465,7 @@ void idle() {
 					break;
 				}
 
-				// disconnect list
+				// Disconnect list
 				case 'D':
 				{
 					std::vector<int> disconnectedIDs = GetVehicleDisconnects(msg.payload);
@@ -476,7 +480,7 @@ void idle() {
 					break;
 				}
 
-				// error message
+				// Error message
 				case 'E':
 				{
 					cerr << "Server error: " << msg.payload << endl;
@@ -496,7 +500,7 @@ void idle() {
 	const double elapsedTime = currTime - previousTime;
 	previousTime = currTime;
 
-	// do a simulation step
+	// Do a simulation step
 	if (vehicle != NULL) {
 		vehicle->update(speed, steering, elapsedTime);
 	}
@@ -515,12 +519,12 @@ void idle() {
 
 void keydown(unsigned char key, int x, int y) {
 
-	// keys that will be held down for extended periods of time will be handled
-	//   in the idle function
+	// Keys that will be held down for extended periods of time will be handled
+	// in the idle function
 	KeyManager::get()->asciiKeyPressed(key);
 
-	// keys that react once when pressed rather than need to be held down
-	//   can be handles normally, like this...
+	// Keys that react once when pressed rather than need to be held down
+	// can be handled normally, like this...
 	switch (key) {
 	case 27: // ESC key
 		exit(0);
@@ -532,10 +536,12 @@ void keydown(unsigned char key, int x, int y) {
 		Camera::get()->togglePursuitMode();
 		break;
 	case 'l':
-		steering = otherVehicles[1]->getSteering();
-		speed = otherVehicles[1]->getSpeed();
-		//make it following code
-		//Camera::get()->togglePursuitMode();
+
+		// Make pursuit mode a toggle key
+
+		//steering = otherVehicles[1]->getSteering();
+		//speed = otherVehicles[1]->getSpeed();
+		Camera::get()->togglePursuitMode();
 		break;
 	}
 

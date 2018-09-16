@@ -11,8 +11,6 @@ class Wheel : public Cylinder {
 
 public:
 
-	friend class Car;
-
 	// Default constructor
 	Wheel(); 
 	Wheel(double radius_, double innerRadius_, double length_, double wheelSpeed_, bool isSteering_, bool isRolling_);
