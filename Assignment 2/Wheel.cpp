@@ -91,6 +91,8 @@ void Wheel::draw() {
 	// wheel (where it touches the ground).
 
 	// DRAWING THE SPOKES
+	// A total of six spokes are drawn from the centre of the wheel
+
 	// Ensuring that the spoke width is not wider than the width of the 
 	// wheel rim.
 	if (spokeRadius > length / 2) {
@@ -98,6 +100,7 @@ void Wheel::draw() {
 		spokeRadius = length / 2;
 	}
 
+	// Draws the first set of spokes (horizontal)
 	glPushMatrix();
 	// Create the new Spoke object
 	GLUquadricObj *spoke = gluNewQuadric();
@@ -116,6 +119,7 @@ void Wheel::draw() {
 	gluCylinder(spoke, spokeRadius, spokeRadius, radius, SLICES, STACKS);
 	glPopMatrix();
 
+	// Draws second set of spokes
 	glPushMatrix();
 	// Rotate about x-axis to turn z-axis 60 degrees counter clockwise
 	glRotated(60, 1, 0, 0);						
@@ -124,6 +128,7 @@ void Wheel::draw() {
 	gluCylinder(spoke, spokeRadius, spokeRadius, radius, SLICES, STACKS);
 	glPopMatrix();
 
+	//Draws third set of spokes
 	glPushMatrix();
 	// Rotate about x-axis to turn z-axis 60 degrees clockwise
 	glRotated(-60, 1, 0, 0);					
