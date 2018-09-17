@@ -83,6 +83,7 @@ int prev_mouse_y = -1;
 Vehicle * vehicle = NULL;
 double speed = 0;
 double steering = 0;
+bool LPressed = 0;
 
 // Default goal location
 std::deque<GoalState> goals;
@@ -503,7 +504,45 @@ void idle() {
 
 	// Do a simulation step
 	if (vehicle != NULL) {
-		vehicle->update(speed, steering, elapsedTime);
+		if (!LPressed) {
+			vehicle->update(speed, steering, elapsedTime);
+		}
+		else {
+			// Insert code for chasing the vehicle
+
+			//Iterate through other vehicles
+			for (std::map<int, Vehicle*>::iterator iter = otherVehicles.begin(); iter != otherVehicles.end(); ++iter) {
+				//double currentID = otherVehicles.find(vs.remoteID);
+				if (otherVehicles[1]) {
+					//Make vehicle position on top of other 
+					double x = otherVehicles[1]->getX();
+					double y = otherVehicles[1]->getY();
+					double z = otherVehicles[1]->getZ();
+
+					// Fixing rotation problems
+					double rotation = otherVehicles[1]->getRotation();
+					double myRotation = vehicle->getRotation();
+
+					//if (myRotation > 180) {
+					//	myRotation = myRotation - 360;
+					//}
+
+					//double angle = myRotation - 180 * atan2(z, x) / PI;
+
+					//if (abs(angle) >= Vehicle::MAX_LEFT_STEERING_DEGS) {
+					//	angle = Vehicle::MAX_LEFT_STEERING_DEGS*angle/abs(angle);
+					//}
+
+					//vehicle->setRotation(rotation+40);
+					vehicle->setPosition(x, y, z);
+					vehicle->setRotation(rotation);
+					// Make vehicle follow
+					steering = otherVehicles[1]->getSteering();
+					speed = otherVehicles[1]->getSpeed();
+					vehicle->update(speed, Vehicle::MAX_LEFT_STEERING_DEGS, (elapsedTime + 5));
+				};
+			}
+		}
 	}
 	for (std::map<int, Vehicle*>::iterator iter = otherVehicles.begin(); iter != otherVehicles.end(); ++iter) {
 		iter->second->update(elapsedTime);
@@ -537,12 +576,8 @@ void keydown(unsigned char key, int x, int y) {
 		Camera::get()->togglePursuitMode();
 		break;
 	case 'l':
-
-		// Make pursuit mode a toggle key
-
-		//steering = otherVehicles[1]->getSteering();
-		//speed = otherVehicles[1]->getSpeed();
-		Camera::get()->togglePursuitMode();
+				// lock the chasing on or off
+		LPressed = !LPressed;
 		break;
 	}
 
