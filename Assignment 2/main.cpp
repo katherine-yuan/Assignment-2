@@ -267,101 +267,89 @@ void idle() {
 	speed    = 0;
 	steering = 0;
 
-	if (KeyManager::get()->isAsciiKeyPressed('l')) {
-		
-		// Code for chasing the vehicle
-		vehicle->setX(otherVehicles[1]->getX());
-		vehicle->setZ(otherVehicles[1]->getZ());
-		vehicle->setRotation(otherVehicles[1]->getRotation());
-		steering = otherVehicles[1]->getSteering();
-		speed = otherVehicles[1]->getSpeed();
+	GamePad::XBoxController currentController(&xinput, 0);
+
+	// Checks whether the xbox controller is connected
+	if (currentController.IsConnected()) {
+		// If it's connected, car should be controlled by the xbox
+		// Keyboard commands will not work when xbox is connected
+
+		// Control the camera with the Xbox
+		if (currentController.PressedX()) {
+			Camera::get()->strafeLeft();
+		}
+		else if (currentController.PressedLeftShoulder()) {
+			Camera::get()->strafeDown();
+		}
+		else if (currentController.PressedB()) {
+			Camera::get()->strafeRight();
+		}
+		else if (currentController.PressedA()) {
+			Camera::get()->moveBackward();
+		}
+		else if (currentController.PressedY()) {
+			Camera::get()->moveForward();
+		}
+		else if (currentController.PressedRightShoulder()) {
+			Camera::get()->strafeUp();
+		}
+		// Controlling the vehicle 
+		if (currentController.PressedDownDpad()) {
+			speed = Vehicle::MAX_BACKWARD_SPEED_MPS;
+		}
+		if (currentController.PressedUpDpad()) {
+			speed = Vehicle::MAX_FORWARD_SPEED_MPS;
+		}
+		if (currentController.PressedLeftDpad()) {
+			steering = Vehicle::MAX_LEFT_STEERING_DEGS * -1;
+		}
+		if (currentController.PressedRightDpad()) {
+			steering = Vehicle::MAX_RIGHT_STEERING_DEGS * -1;
+		}
+
 	}
 	else {
-		GamePad::XBoxController currentController(&xinput, 0);
-
-		// Checks whether the xbox controller is connected
-		if (currentController.IsConnected()) {
-			// If it's connected, car should be controlled by the xbox
-			// Keyboard commands will not work when xbox is connected
-
-			// Control the camera with the Xbox
-			if (currentController.PressedX()) {
-				Camera::get()->strafeLeft();
-			}
-			else if (currentController.PressedLeftShoulder()) {
-				Camera::get()->strafeDown();
-			}
-			else if (currentController.PressedB()) {
-				Camera::get()->strafeRight();
-			}
-			else if (currentController.PressedA()) {
-				Camera::get()->moveBackward();
-			}
-			else if (currentController.PressedY()) {
-				Camera::get()->moveForward();
-			}
-			else if (currentController.PressedRightShoulder()) {
-				Camera::get()->strafeUp();
-			}
-
-			// Controlling the vehicle 
-			if (currentController.PressedDownDpad()) {
-				speed = Vehicle::MAX_BACKWARD_SPEED_MPS;
-			}
-			if (currentController.PressedUpDpad()) {
-				speed = Vehicle::MAX_FORWARD_SPEED_MPS;
-			}
-			if (currentController.PressedLeftDpad()) {
-				steering = Vehicle::MAX_LEFT_STEERING_DEGS * -1;
-			}
-			if (currentController.PressedRightDpad()) {
-				steering = Vehicle::MAX_RIGHT_STEERING_DEGS * -1;
-			}
+		// If the controller is not connected operate through keyboard.
+		// Functions are in the same order as above.
+		if (KeyManager::get()->isAsciiKeyPressed('a')) {
+			Camera::get()->strafeLeft();
 		}
-		else {
-			// If the controller is not connected operate through keyboard.
-			// Functions are in the same order as above.
-			if (KeyManager::get()->isAsciiKeyPressed('a')) {
-				Camera::get()->strafeLeft();
-			}
 
-			if (KeyManager::get()->isAsciiKeyPressed('c')) {
-				Camera::get()->strafeDown();
-			}
+		if (KeyManager::get()->isAsciiKeyPressed('c')) {
+			Camera::get()->strafeDown();
+		}
 
-			if (KeyManager::get()->isAsciiKeyPressed('d')) {
-				Camera::get()->strafeRight();
-			}
+		if (KeyManager::get()->isAsciiKeyPressed('d')) {
+			Camera::get()->strafeRight();
+		}
 
-			if (KeyManager::get()->isAsciiKeyPressed('s')) {
-				Camera::get()->moveBackward();
-			}
+		if (KeyManager::get()->isAsciiKeyPressed('s')) {
+			Camera::get()->moveBackward();
+		}
 
-			if (KeyManager::get()->isAsciiKeyPressed('w')) {
-				Camera::get()->moveForward();
-			}
+		if (KeyManager::get()->isAsciiKeyPressed('w')) {
+			Camera::get()->moveForward();
+		}
 
-			if (KeyManager::get()->isAsciiKeyPressed(' ')) {
-				Camera::get()->strafeUp();
-			}
+		if (KeyManager::get()->isAsciiKeyPressed(' ')) {
+			Camera::get()->strafeUp();
+		}
 
-			// Controlling the vehicle 
-			if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_LEFT)) {
-				steering = Vehicle::MAX_LEFT_STEERING_DEGS * -1;
-			}
+		// Controlling the vehicle 
+		if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_LEFT)) {
+			steering = Vehicle::MAX_LEFT_STEERING_DEGS * -1;
+		}
 
-			if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_RIGHT)) {
-				steering = Vehicle::MAX_RIGHT_STEERING_DEGS * -1;
-			}
+		if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_RIGHT)) {
+			steering = Vehicle::MAX_RIGHT_STEERING_DEGS * -1;
+		}
 
-			if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_UP)) {
-				speed = Vehicle::MAX_FORWARD_SPEED_MPS;
-			}
+		if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_UP)) {
+			speed = Vehicle::MAX_FORWARD_SPEED_MPS;
+		}
 
-			if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_DOWN)) {
-				speed = Vehicle::MAX_BACKWARD_SPEED_MPS;
-			}
-
+		if (KeyManager::get()->isSpecialKeyPressed(GLUT_KEY_DOWN)) {
+			speed = Vehicle::MAX_BACKWARD_SPEED_MPS;
 		}
 
 	}
@@ -511,9 +499,9 @@ void idle() {
 			// Insert code for chasing the vehicle
 
 			//Iterate through other vehicles
-			for (std::map<int, Vehicle*>::iterator iter = otherVehicles.begin(); iter != otherVehicles.end(); ++iter) {
+			//for (std::map<int, Vehicle*>::iterator iter = otherVehicles.begin(); iter != otherVehicles.end(); ++iter) {
 				//double currentID = otherVehicles.find(vs.remoteID);
-				if (otherVehicles[1]) {
+				//if (otherVehicles[1]) {
 					//Make vehicle position on top of other 
 					double x = otherVehicles[1]->getX();
 					double y = otherVehicles[1]->getY();
@@ -539,9 +527,11 @@ void idle() {
 					// Make vehicle follow
 					steering = otherVehicles[1]->getSteering();
 					speed = otherVehicles[1]->getSpeed();
-					vehicle->update(speed, Vehicle::MAX_LEFT_STEERING_DEGS, (elapsedTime + 5));
-				};
-			}
+					//vehicle->update(speed, Vehicle::MAX_LEFT_STEERING_DEGS, (elapsedTime + 5));
+					vehicle->update(otherVehicles[1]->getSpeed(), otherVehicles[1]->getSteering(), elapsedTime);
+
+				//};
+			//}
 		}
 	}
 	for (std::map<int, Vehicle*>::iterator iter = otherVehicles.begin(); iter != otherVehicles.end(); ++iter) {
@@ -576,7 +566,7 @@ void keydown(unsigned char key, int x, int y) {
 		Camera::get()->togglePursuitMode();
 		break;
 	case 'l':
-				// lock the chasing on or off
+		// lock the chasing on or off
 		LPressed = !LPressed;
 		break;
 	}
