@@ -546,39 +546,6 @@ void idle() {
 
 			vehicle->update(pursuitMagnitude, steering, elapsedTime);
 
-			////Iterate through other vehicles
-			////for (std::map<int, Vehicle*>::iterator iter = otherVehicles.begin(); iter != otherVehicles.end(); ++iter) {
-			//	//double currentID = otherVehicles.find(vs.remoteID);
-			//	//if (otherVehicles[1]) {
-			//		//Make vehicle position on top of other 
-			//		double x = otherVehicles[1]->getX();
-			//		double y = otherVehicles[1]->getY();
-			//		double z = otherVehicles[1]->getZ();
-
-			//		// Fixing rotation problems
-			//		double rotation = otherVehicles[1]->getRotation();
-			//		double myRotation = vehicle->getRotation();
-
-			//		//if (myRotation > 180) {
-			//		//	myRotation = myRotation - 360;
-			//		//}
-
-			//		//double angle = myRotation - 180 * atan2(z, x) / PI;
-
-			//		//if (abs(angle) >= Vehicle::MAX_LEFT_STEERING_DEGS) {
-			//		//	angle = Vehicle::MAX_LEFT_STEERING_DEGS*angle/abs(angle);
-			//		//}
-
-			//		//vehicle->setRotation(rotation+40);
-			//		vehicle->setPosition(x, y, z);
-			//		vehicle->setRotation(rotation);
-			//		// Make vehicle follow
-			//		steering = otherVehicles[1]->getSteering();
-			//		speed = otherVehicles[1]->getSpeed();
-			//		vehicle->update(speed, Vehicle::MAX_LEFT_STEERING_DEGS, (elapsedTime + 5);
-
-			//	//};
-			////}
 		}
 	}
 	for (std::map<int, Vehicle*>::iterator iter = otherVehicles.begin(); iter != otherVehicles.end(); ++iter) {
